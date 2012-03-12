@@ -1,0 +1,477 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E9AE473C150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
+		E9AE473E150DDB0600146D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473D150DDB0600146D3D /* Foundation.framework */; };
+		E9AE4740150DDB0600146D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473F150DDB0600146D3D /* CoreGraphics.framework */; };
+		E9AE4742150DDB0600146D3D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE4741150DDB0600146D3D /* GLKit.framework */; };
+		E9AE4744150DDB0600146D3D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE4743150DDB0600146D3D /* OpenGLES.framework */; };
+		E9AE474A150DDB0600146D3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4748150DDB0600146D3D /* InfoPlist.strings */; };
+		E9AE474C150DDB0600146D3D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE474B150DDB0600146D3D /* main.m */; };
+		E9AE4750150DDB0600146D3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE474F150DDB0600146D3D /* AppDelegate.m */; };
+		E9AE4753150DDB0600146D3D /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4751150DDB0600146D3D /* MainStoryboard_iPhone.storyboard */; };
+		E9AE4756150DDB0600146D3D /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4754150DDB0600146D3D /* MainStoryboard_iPad.storyboard */; };
+		E9AE4758150DDB0600146D3D /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4757150DDB0600146D3D /* Shader.fsh */; };
+		E9AE475A150DDB0600146D3D /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4759150DDB0600146D3D /* Shader.vsh */; };
+		E9AE475D150DDB0600146D3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE475C150DDB0600146D3D /* ViewController.m */; };
+		E9AE4765150DDB0600146D3D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE4764150DDB0600146D3D /* SenTestingKit.framework */; };
+		E9AE4766150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
+		E9AE4767150DDB0600146D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473D150DDB0600146D3D /* Foundation.framework */; };
+		E9AE476F150DDB0600146D3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9AE476D150DDB0600146D3D /* InfoPlist.strings */; };
+		E9AE4772150DDB0600146D3D /* TomsCubeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE4771150DDB0600146D3D /* TomsCubeTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E9AE4768150DDB0600146D3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9AE472E150DDB0500146D3D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E9AE4736150DDB0600146D3D;
+			remoteInfo = TomsCube;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E9AE4737150DDB0600146D3D /* TomsCube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomsCube.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9AE473B150DDB0600146D3D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E9AE473D150DDB0600146D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E9AE473F150DDB0600146D3D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E9AE4741150DDB0600146D3D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		E9AE4743150DDB0600146D3D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		E9AE4747150DDB0600146D3D /* TomsCube-Info.plist */ = {isa = PBXFileReference; path = "TomsCube-Info.plist"; sourceTree = "<group>"; };
+		E9AE4749150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E9AE474B150DDB0600146D3D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E9AE474D150DDB0600146D3D /* TomsCube-Prefix.pch */ = {isa = PBXFileReference; path = "TomsCube-Prefix.pch"; sourceTree = "<group>"; };
+		E9AE474E150DDB0600146D3D /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		E9AE474F150DDB0600146D3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E9AE4752150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		E9AE4755150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		E9AE4757150DDB0600146D3D /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		E9AE4759150DDB0600146D3D /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		E9AE475B150DDB0600146D3D /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		E9AE475C150DDB0600146D3D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E9AE4763150DDB0600146D3D /* TomsCubeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomsCubeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9AE4764150DDB0600146D3D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		E9AE476C150DDB0600146D3D /* TomsCubeTests-Info.plist */ = {isa = PBXFileReference; path = "TomsCubeTests-Info.plist"; sourceTree = "<group>"; };
+		E9AE476E150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E9AE4770150DDB0600146D3D /* TomsCubeTests.h */ = {isa = PBXFileReference; path = TomsCubeTests.h; sourceTree = "<group>"; };
+		E9AE4771150DDB0600146D3D /* TomsCubeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TomsCubeTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E9AE4734150DDB0600146D3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9AE473C150DDB0600146D3D /* UIKit.framework in Frameworks */,
+				E9AE473E150DDB0600146D3D /* Foundation.framework in Frameworks */,
+				E9AE4740150DDB0600146D3D /* CoreGraphics.framework in Frameworks */,
+				E9AE4742150DDB0600146D3D /* GLKit.framework in Frameworks */,
+				E9AE4744150DDB0600146D3D /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9AE475F150DDB0600146D3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9AE4765150DDB0600146D3D /* SenTestingKit.framework in Frameworks */,
+				E9AE4766150DDB0600146D3D /* UIKit.framework in Frameworks */,
+				E9AE4767150DDB0600146D3D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E9AE472C150DDB0500146D3D = {
+			isa = PBXGroup;
+			children = (
+				E9AE4745150DDB0600146D3D /* TomsCube */,
+				E9AE476A150DDB0600146D3D /* TomsCubeTests */,
+				E9AE473A150DDB0600146D3D /* Frameworks */,
+				E9AE4738150DDB0600146D3D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E9AE4738150DDB0600146D3D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E9AE4737150DDB0600146D3D /* TomsCube.app */,
+				E9AE4763150DDB0600146D3D /* TomsCubeTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E9AE473A150DDB0600146D3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E9AE473B150DDB0600146D3D /* UIKit.framework */,
+				E9AE473D150DDB0600146D3D /* Foundation.framework */,
+				E9AE473F150DDB0600146D3D /* CoreGraphics.framework */,
+				E9AE4741150DDB0600146D3D /* GLKit.framework */,
+				E9AE4743150DDB0600146D3D /* OpenGLES.framework */,
+				E9AE4764150DDB0600146D3D /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E9AE4745150DDB0600146D3D /* TomsCube */ = {
+			isa = PBXGroup;
+			children = (
+				E9AE474E150DDB0600146D3D /* AppDelegate.h */,
+				E9AE474F150DDB0600146D3D /* AppDelegate.m */,
+				E9AE4751150DDB0600146D3D /* MainStoryboard_iPhone.storyboard */,
+				E9AE4754150DDB0600146D3D /* MainStoryboard_iPad.storyboard */,
+				E9AE4757150DDB0600146D3D /* Shader.fsh */,
+				E9AE4759150DDB0600146D3D /* Shader.vsh */,
+				E9AE475B150DDB0600146D3D /* ViewController.h */,
+				E9AE475C150DDB0600146D3D /* ViewController.m */,
+				E9AE4746150DDB0600146D3D /* Supporting Files */,
+			);
+			path = TomsCube;
+			sourceTree = "<group>";
+		};
+		E9AE4746150DDB0600146D3D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9AE4747150DDB0600146D3D /* TomsCube-Info.plist */,
+				E9AE4748150DDB0600146D3D /* InfoPlist.strings */,
+				E9AE474B150DDB0600146D3D /* main.m */,
+				E9AE474D150DDB0600146D3D /* TomsCube-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E9AE476A150DDB0600146D3D /* TomsCubeTests */ = {
+			isa = PBXGroup;
+			children = (
+				E9AE4770150DDB0600146D3D /* TomsCubeTests.h */,
+				E9AE4771150DDB0600146D3D /* TomsCubeTests.m */,
+				E9AE476B150DDB0600146D3D /* Supporting Files */,
+			);
+			path = TomsCubeTests;
+			sourceTree = "<group>";
+		};
+		E9AE476B150DDB0600146D3D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9AE476C150DDB0600146D3D /* TomsCubeTests-Info.plist */,
+				E9AE476D150DDB0600146D3D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E9AE4736150DDB0600146D3D /* TomsCube */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9AE4775150DDB0600146D3D /* Build configuration list for PBXNativeTarget "TomsCube" */;
+			buildPhases = (
+				E9AE4733150DDB0600146D3D /* Sources */,
+				E9AE4734150DDB0600146D3D /* Frameworks */,
+				E9AE4735150DDB0600146D3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TomsCube;
+			productName = TomsCube;
+			productReference = E9AE4737150DDB0600146D3D /* TomsCube.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E9AE4762150DDB0600146D3D /* TomsCubeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9AE4778150DDB0600146D3D /* Build configuration list for PBXNativeTarget "TomsCubeTests" */;
+			buildPhases = (
+				E9AE475E150DDB0600146D3D /* Sources */,
+				E9AE475F150DDB0600146D3D /* Frameworks */,
+				E9AE4760150DDB0600146D3D /* Resources */,
+				E9AE4761150DDB0600146D3D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E9AE4769150DDB0600146D3D /* PBXTargetDependency */,
+			);
+			name = TomsCubeTests;
+			productName = TomsCubeTests;
+			productReference = E9AE4763150DDB0600146D3D /* TomsCubeTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E9AE472E150DDB0500146D3D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Google;
+			};
+			buildConfigurationList = E9AE4731150DDB0500146D3D /* Build configuration list for PBXProject "TomsCube" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E9AE472C150DDB0500146D3D;
+			productRefGroup = E9AE4738150DDB0600146D3D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E9AE4736150DDB0600146D3D /* TomsCube */,
+				E9AE4762150DDB0600146D3D /* TomsCubeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E9AE4735150DDB0600146D3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9AE474A150DDB0600146D3D /* InfoPlist.strings in Resources */,
+				E9AE4753150DDB0600146D3D /* MainStoryboard_iPhone.storyboard in Resources */,
+				E9AE4756150DDB0600146D3D /* MainStoryboard_iPad.storyboard in Resources */,
+				E9AE4758150DDB0600146D3D /* Shader.fsh in Resources */,
+				E9AE475A150DDB0600146D3D /* Shader.vsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9AE4760150DDB0600146D3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9AE476F150DDB0600146D3D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E9AE4761150DDB0600146D3D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E9AE4733150DDB0600146D3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9AE474C150DDB0600146D3D /* main.m in Sources */,
+				E9AE4750150DDB0600146D3D /* AppDelegate.m in Sources */,
+				E9AE475D150DDB0600146D3D /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9AE475E150DDB0600146D3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9AE4772150DDB0600146D3D /* TomsCubeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E9AE4769150DDB0600146D3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E9AE4736150DDB0600146D3D /* TomsCube */;
+			targetProxy = E9AE4768150DDB0600146D3D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E9AE4748150DDB0600146D3D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E9AE4749150DDB0600146D3D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E9AE4751150DDB0600146D3D /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E9AE4752150DDB0600146D3D /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		E9AE4754150DDB0600146D3D /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E9AE4755150DDB0600146D3D /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		E9AE476D150DDB0600146D3D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E9AE476E150DDB0600146D3D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E9AE4773150DDB0600146D3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E9AE4774150DDB0600146D3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E9AE4776150DDB0600146D3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TomsCube/TomsCube-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "TomsCube/TomsCube-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E9AE4777150DDB0600146D3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TomsCube/TomsCube-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "TomsCube/TomsCube-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E9AE4779150DDB0600146D3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TomsCube.app/TomsCube";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TomsCube/TomsCube-Prefix.pch";
+				INFOPLIST_FILE = "TomsCubeTests/TomsCubeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		E9AE477A150DDB0600146D3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TomsCube.app/TomsCube";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TomsCube/TomsCube-Prefix.pch";
+				INFOPLIST_FILE = "TomsCubeTests/TomsCubeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E9AE4731150DDB0500146D3D /* Build configuration list for PBXProject "TomsCube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9AE4773150DDB0600146D3D /* Debug */,
+				E9AE4774150DDB0600146D3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E9AE4775150DDB0600146D3D /* Build configuration list for PBXNativeTarget "TomsCube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9AE4776150DDB0600146D3D /* Debug */,
+				E9AE4777150DDB0600146D3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E9AE4778150DDB0600146D3D /* Build configuration list for PBXNativeTarget "TomsCubeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9AE4779150DDB0600146D3D /* Debug */,
+				E9AE477A150DDB0600146D3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E9AE472E150DDB0500146D3D /* Project object */;
+}

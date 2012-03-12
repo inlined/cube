@@ -44,23 +44,23 @@
 		E9AE473F150DDB0600146D3D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E9AE4741150DDB0600146D3D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		E9AE4743150DDB0600146D3D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		E9AE4747150DDB0600146D3D /* TomsCube-Info.plist */ = {isa = PBXFileReference; path = "TomsCube-Info.plist"; sourceTree = "<group>"; };
+		E9AE4747150DDB0600146D3D /* TomsCube-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TomsCube-Info.plist"; sourceTree = "<group>"; };
 		E9AE4749150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E9AE474B150DDB0600146D3D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E9AE474D150DDB0600146D3D /* TomsCube-Prefix.pch */ = {isa = PBXFileReference; path = "TomsCube-Prefix.pch"; sourceTree = "<group>"; };
-		E9AE474E150DDB0600146D3D /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		E9AE474D150DDB0600146D3D /* TomsCube-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TomsCube-Prefix.pch"; sourceTree = "<group>"; };
+		E9AE474E150DDB0600146D3D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E9AE474F150DDB0600146D3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E9AE4752150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		E9AE4755150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E9AE4757150DDB0600146D3D /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		E9AE4759150DDB0600146D3D /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		E9AE475B150DDB0600146D3D /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		E9AE475B150DDB0600146D3D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E9AE475C150DDB0600146D3D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E9AE4763150DDB0600146D3D /* TomsCubeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomsCubeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AE4764150DDB0600146D3D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		E9AE476C150DDB0600146D3D /* TomsCubeTests-Info.plist */ = {isa = PBXFileReference; path = "TomsCubeTests-Info.plist"; sourceTree = "<group>"; };
+		E9AE476C150DDB0600146D3D /* TomsCubeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TomsCubeTests-Info.plist"; sourceTree = "<group>"; };
 		E9AE476E150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E9AE4770150DDB0600146D3D /* TomsCubeTests.h */ = {isa = PBXFileReference; path = TomsCubeTests.h; sourceTree = "<group>"; };
+		E9AE4770150DDB0600146D3D /* TomsCubeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TomsCubeTests.h; sourceTree = "<group>"; };
 		E9AE4771150DDB0600146D3D /* TomsCubeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TomsCubeTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

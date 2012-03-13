@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9871708150FE6CE0096089A /* CubeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9871707150FE6CE0096089A /* CubeView.mm */; };
 		E9AE473C150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
 		E9AE473E150DDB0600146D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473D150DDB0600146D3D /* Foundation.framework */; };
 		E9AE4740150DDB0600146D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473F150DDB0600146D3D /* CoreGraphics.framework */; };
@@ -24,7 +25,11 @@
 		E9AE4766150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
 		E9AE4767150DDB0600146D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473D150DDB0600146D3D /* Foundation.framework */; };
 		E9AE476F150DDB0600146D3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9AE476D150DDB0600146D3D /* InfoPlist.strings */; };
-		E9AE4772150DDB0600146D3D /* TomsCubeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE4771150DDB0600146D3D /* TomsCubeTests.m */; };
+		E9AE4772150DDB0600146D3D /* CubeModelTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9AE4771150DDB0600146D3D /* CubeModelTests.mm */; };
+		E9AE4784150DF86300146D3D /* trackball.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AE4782150DF86300146D3D /* trackball.c */; };
+		E9AE4785150DF86300146D3D /* trackball.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AE4782150DF86300146D3D /* trackball.c */; };
+		E9AE478F150E63F100146D3D /* CubeModel.cc in Sources */ = {isa = PBXBuildFile; fileRef = E9AE478D150E63F100146D3D /* CubeModel.cc */; };
+		E9E1A53F150ED3AC0012CFF2 /* CubeModel.cc in Sources */ = {isa = PBXBuildFile; fileRef = E9AE478D150E63F100146D3D /* CubeModel.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E9871706150FE6CE0096089A /* CubeView.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CubeView.hh; path = TomsCube/CubeView.hh; sourceTree = "<group>"; };
+		E9871707150FE6CE0096089A /* CubeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CubeView.mm; path = TomsCube/CubeView.mm; sourceTree = "<group>"; };
 		E9AE4737150DDB0600146D3D /* TomsCube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomsCube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AE473B150DDB0600146D3D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E9AE473D150DDB0600146D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -60,8 +67,12 @@
 		E9AE4764150DDB0600146D3D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E9AE476C150DDB0600146D3D /* TomsCubeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TomsCubeTests-Info.plist"; sourceTree = "<group>"; };
 		E9AE476E150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E9AE4770150DDB0600146D3D /* TomsCubeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TomsCubeTests.h; sourceTree = "<group>"; };
-		E9AE4771150DDB0600146D3D /* TomsCubeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TomsCubeTests.m; sourceTree = "<group>"; };
+		E9AE4770150DDB0600146D3D /* CubeModelTests.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CubeModelTests.hh; sourceTree = "<group>"; };
+		E9AE4771150DDB0600146D3D /* CubeModelTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CubeModelTests.mm; sourceTree = "<group>"; };
+		E9AE477B150DDF7F00146D3D /* CubeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CubeModel.h; path = TomsCube/CubeModel.h; sourceTree = "<group>"; };
+		E9AE4782150DF86300146D3D /* trackball.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trackball.c; sourceTree = "<group>"; };
+		E9AE4783150DF86300146D3D /* trackball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trackball.h; sourceTree = "<group>"; };
+		E9AE478D150E63F100146D3D /* CubeModel.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CubeModel.cc; path = TomsCube/CubeModel.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +104,7 @@
 		E9AE472C150DDB0500146D3D = {
 			isa = PBXGroup;
 			children = (
+				E9E1A527150EC8610012CFF2 /* Cube */,
 				E9AE4745150DDB0600146D3D /* TomsCube */,
 				E9AE476A150DDB0600146D3D /* TomsCubeTests */,
 				E9AE473A150DDB0600146D3D /* Frameworks */,
@@ -141,6 +153,8 @@
 		E9AE4746150DDB0600146D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E9AE4782150DF86300146D3D /* trackball.c */,
+				E9AE4783150DF86300146D3D /* trackball.h */,
 				E9AE4747150DDB0600146D3D /* TomsCube-Info.plist */,
 				E9AE4748150DDB0600146D3D /* InfoPlist.strings */,
 				E9AE474B150DDB0600146D3D /* main.m */,
@@ -152,8 +166,8 @@
 		E9AE476A150DDB0600146D3D /* TomsCubeTests */ = {
 			isa = PBXGroup;
 			children = (
-				E9AE4770150DDB0600146D3D /* TomsCubeTests.h */,
-				E9AE4771150DDB0600146D3D /* TomsCubeTests.m */,
+				E9AE4770150DDB0600146D3D /* CubeModelTests.hh */,
+				E9AE4771150DDB0600146D3D /* CubeModelTests.mm */,
 				E9AE476B150DDB0600146D3D /* Supporting Files */,
 			);
 			path = TomsCubeTests;
@@ -166,6 +180,17 @@
 				E9AE476D150DDB0600146D3D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E9E1A527150EC8610012CFF2 /* Cube */ = {
+			isa = PBXGroup;
+			children = (
+				E9AE477B150DDF7F00146D3D /* CubeModel.h */,
+				E9AE478D150E63F100146D3D /* CubeModel.cc */,
+				E9871706150FE6CE0096089A /* CubeView.hh */,
+				E9871707150FE6CE0096089A /* CubeView.mm */,
+			);
+			name = Cube;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +306,9 @@
 				E9AE474C150DDB0600146D3D /* main.m in Sources */,
 				E9AE4750150DDB0600146D3D /* AppDelegate.m in Sources */,
 				E9AE475D150DDB0600146D3D /* ViewController.m in Sources */,
+				E9AE4784150DF86300146D3D /* trackball.c in Sources */,
+				E9AE478F150E63F100146D3D /* CubeModel.cc in Sources */,
+				E9871708150FE6CE0096089A /* CubeView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +316,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9AE4772150DDB0600146D3D /* TomsCubeTests.m in Sources */,
+				E9AE4772150DDB0600146D3D /* CubeModelTests.mm in Sources */,
+				E9AE4785150DF86300146D3D /* trackball.c in Sources */,
+				E9E1A53F150ED3AC0012CFF2 /* CubeModel.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +442,6 @@
 		E9AE4779150DDB0600146D3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TomsCube.app/TomsCube";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -421,7 +450,6 @@
 				GCC_PREFIX_HEADER = "TomsCube/TomsCube-Prefix.pch";
 				INFOPLIST_FILE = "TomsCubeTests/TomsCubeTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -429,7 +457,6 @@
 		E9AE477A150DDB0600146D3D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TomsCube.app/TomsCube";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -438,7 +465,6 @@
 				GCC_PREFIX_HEADER = "TomsCube/TomsCube-Prefix.pch";
 				INFOPLIST_FILE = "TomsCubeTests/TomsCubeTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -462,6 +488,7 @@
 				E9AE4777150DDB0600146D3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9AE4778150DDB0600146D3D /* Build configuration list for PBXNativeTarget "TomsCubeTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +497,7 @@
 				E9AE477A150DDB0600146D3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

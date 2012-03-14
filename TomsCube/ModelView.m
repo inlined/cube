@@ -12,27 +12,31 @@
 
 @synthesize program = _program;
 
-- (id) initWithProgram:(GLuint) program
+- (id) init
 {
   self = [super init];
   if (self) {
-    _program = program;
+    self.program = glCreateProgram();
+    NSLog(@"Initializing with program %d", self.program);
   }
   return self;
 }
 - (void) setupGL {}
 - (void) tearDownGL
 {
-  self.program = 0;
+  if (self.program) {
+    glDeleteProgram(self.program);
+    self.program = 0;
+  }
 }
 
 @end
 
 @implementation ModelViewWithShaders
 
-- (id) initWithProgram:(GLuint) program
+- (id) init
 {
-  return self = [super initWithProgram:program];
+  return self = [super init];
 }
 
 - (void) setupGL
@@ -48,6 +52,7 @@
 
 - (BOOL)loadShaders:(NSArray*) shaders withAttribs:(NSArray*) attribs
 {
+  NSAssert(self.program, @"Program must be defined");
   GLuint shader_handles[[shaders count]];
   
   for (int i = 0; i < [shaders count]; ++i) {
@@ -77,7 +82,7 @@
   }
   
   for (int i = 0; i < [attribs count]; ++i) {
-    glBindAttribLocation(self.program, i, [[attribs objectAtIndex:i] cString]);
+    glBindAttribLocation(self.program, i, [[[attribs objectAtIndex:i] description] cString]);
   }
   
   // Link program.
@@ -188,7 +193,9 @@
 
 - (GLint) uniformWithName:(GLchar*) name
 {
-  return glGetUniformLocation(self.program, name);
+  GLint i = glGetUniformLocation(self.program, name);
+  NSLog(@"Uniform with name %s is id %d", name, i);
+  return i;
 }
 
 @end

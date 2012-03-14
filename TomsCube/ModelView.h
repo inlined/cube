@@ -11,14 +11,14 @@
 #import <GLKit/GLKit.h>
 
 @interface ModelView : NSObject
-- (id) initWithProgram:(GLuint) program;
+- (id) init;
 - (void) setupGL;
 - (void) tearDownGL;
 @property (assign, nonatomic) GLuint program;
 @end
 
 @interface ModelViewWithShaders : ModelView
-- (id) initWithProgram:(GLuint) program;
+- (id) init;
 // Shaders in the form "Shader.fsh" "Shader.vsh". The type is deduced from the
 // extension.
 - (BOOL)loadShaders:(NSArray*)shaders withAttribs:(NSArray*)attribs;

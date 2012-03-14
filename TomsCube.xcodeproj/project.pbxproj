@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E9871708150FE6CE0096089A /* CubeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9871707150FE6CE0096089A /* CubeView.mm */; };
+		E987170C151003010096089A /* ModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E987170B151003010096089A /* ModelView.m */; };
 		E9AE473C150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
 		E9AE473E150DDB0600146D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473D150DDB0600146D3D /* Foundation.framework */; };
 		E9AE4740150DDB0600146D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473F150DDB0600146D3D /* CoreGraphics.framework */; };
@@ -45,6 +46,8 @@
 /* Begin PBXFileReference section */
 		E9871706150FE6CE0096089A /* CubeView.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CubeView.hh; path = TomsCube/CubeView.hh; sourceTree = "<group>"; };
 		E9871707150FE6CE0096089A /* CubeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CubeView.mm; path = TomsCube/CubeView.mm; sourceTree = "<group>"; };
+		E987170A151003010096089A /* ModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; name = ModelView.h; path = TomsCube/ModelView.h; sourceTree = "<group>"; };
+		E987170B151003010096089A /* ModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelView.m; path = TomsCube/ModelView.m; sourceTree = "<group>"; };
 		E9AE4737150DDB0600146D3D /* TomsCube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomsCube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AE473B150DDB0600146D3D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E9AE473D150DDB0600146D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -101,9 +104,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9871709151002DF0096089A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E987170A151003010096089A /* ModelView.h */,
+				E987170B151003010096089A /* ModelView.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		E9AE472C150DDB0500146D3D = {
 			isa = PBXGroup;
 			children = (
+				E9871709151002DF0096089A /* Util */,
 				E9E1A527150EC8610012CFF2 /* Cube */,
 				E9AE4745150DDB0600146D3D /* TomsCube */,
 				E9AE476A150DDB0600146D3D /* TomsCubeTests */,
@@ -309,6 +322,7 @@
 				E9AE4784150DF86300146D3D /* trackball.c in Sources */,
 				E9AE478F150E63F100146D3D /* CubeModel.cc in Sources */,
 				E9871708150FE6CE0096089A /* CubeView.mm in Sources */,
+				E987170C151003010096089A /* ModelView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

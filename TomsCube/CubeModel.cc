@@ -88,10 +88,13 @@ inline void Cube::RotateFace180(Cube::Face face) {
 }
 
 Cube::Cube() {
-  for (WhichFace face = FRONT_FACE; face < NUM_FACES; ++face)
+  for (WhichFace face_id = FRONT_FACE; face_id < NUM_FACES; ++face_id)
   {
-    // Each color enum is 4B of a face enum. nifty!
-    memset(GetFace(face), face, sizeof(FaceBuffer));
+    Face face = GetFace(face_id);
+    // Memset does not work because enums are 4B in iOS
+    for (int square = 0; square < 9; ++square) {
+      face[square] = (Color)face_id;
+    }
   }
 }
 

@@ -3,7 +3,7 @@
 //  TomsCube
 //
 //  Created by Thomas Bouldin on 3/12/12.
-//  Copyright (c) 2012 Google. All rights reserved.
+//  Copyright (c) 2012 Espressobytes. All rights reserved.
 //
 
 #import "AppDelegate.h"

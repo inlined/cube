@@ -16,13 +16,13 @@
 // This allows byte blasting as each byte will describe a different vertex of
 // the sticker face
 typedef enum {
-  RED = 0,
-  WHITE = 0x01010101,
-  ORANGE = 0x02020202,
-  YELLOW = 0x03030303,
-  GREEN = 0x04040404,
-  BLUE = 0x05050505,
-  NUM_COLORS = 6
+  RED,
+  WHITE,
+  ORANGE,
+  YELLOW,
+  GREEN,
+  BLUE,
+  NUM_COLORS
 } Color;
 
 // Index into a cube a Face * 9 to get the start index.

@@ -26,11 +26,7 @@ NSString* nameForColor(Color color) {
   static NSString* names[] = 
   { @"RED", @"WHITE", @"ORANGE", @"YELLOW", @"GREEN", @"BLUE" };
   
-  int code = color & 0xFF;
-  if (code << 8 != (color & (0xFF << 8)) ||
-      code << 16 != (color & (0xFF << 16)) ||
-      code << 24 != (color & (0xFF << 24)) ||
-      code >= NUM_COLORS) {
+  if (color >= NUM_COLORS) {
     return @"INVALID COLOR";
   }
   return names[color];

@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E94D35CD1511331400F52664 /* SpinningBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94D35CC1511331300F52664 /* SpinningBoxView.m */; };
+		E94D35CE151133BB00F52664 /* Boxes.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E94D35C9151132C300F52664 /* Boxes.vsh */; };
+		E94D35CF151133C100F52664 /* Phong.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E94D35C7151132B700F52664 /* Phong.vsh */; };
+		E94D35D21511442100F52664 /* Phong.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E94D35D01511441600F52664 /* Phong.fsh */; };
 		E9871708150FE6CE0096089A /* CubeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9871707150FE6CE0096089A /* CubeView.mm */; };
-		E987170C151003010096089A /* ModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E987170B151003010096089A /* ModelView.m */; };
+		E987170C151003010096089A /* ModelView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E987170B151003010096089A /* ModelView.mm */; };
 		E9AE473C150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
 		E9AE473E150DDB0600146D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473D150DDB0600146D3D /* Foundation.framework */; };
 		E9AE4740150DDB0600146D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473F150DDB0600146D3D /* CoreGraphics.framework */; };
@@ -19,9 +23,8 @@
 		E9AE4750150DDB0600146D3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE474F150DDB0600146D3D /* AppDelegate.m */; };
 		E9AE4753150DDB0600146D3D /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4751150DDB0600146D3D /* MainStoryboard_iPhone.storyboard */; };
 		E9AE4756150DDB0600146D3D /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4754150DDB0600146D3D /* MainStoryboard_iPad.storyboard */; };
-		E9AE4758150DDB0600146D3D /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4757150DDB0600146D3D /* Shader.fsh */; };
-		E9AE475A150DDB0600146D3D /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4759150DDB0600146D3D /* Shader.vsh */; };
-		E9AE475D150DDB0600146D3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AE475C150DDB0600146D3D /* ViewController.m */; };
+		E9AE4758150DDB0600146D3D /* Boxes.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E9AE4757150DDB0600146D3D /* Boxes.fsh */; };
+		E9AE475D150DDB0600146D3D /* SceneView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9AE475C150DDB0600146D3D /* SceneView.mm */; };
 		E9AE4765150DDB0600146D3D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE4764150DDB0600146D3D /* SenTestingKit.framework */; };
 		E9AE4766150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
 		E9AE4767150DDB0600146D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473D150DDB0600146D3D /* Foundation.framework */; };
@@ -44,10 +47,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E94D35C7151132B700F52664 /* Phong.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Phong.vsh; path = TomsCube/Shaders/Phong.vsh; sourceTree = "<group>"; };
+		E94D35C9151132C300F52664 /* Boxes.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Boxes.vsh; path = TomsCube/Shaders/Boxes.vsh; sourceTree = "<group>"; };
+		E94D35CB1511331300F52664 /* SpinningBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpinningBoxView.h; path = TomsCube/SpinningBoxView.h; sourceTree = "<group>"; };
+		E94D35CC1511331300F52664 /* SpinningBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpinningBoxView.m; path = TomsCube/SpinningBoxView.m; sourceTree = "<group>"; };
+		E94D35D01511441600F52664 /* Phong.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Phong.fsh; sourceTree = "<group>"; };
 		E9871706150FE6CE0096089A /* CubeView.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CubeView.hh; path = TomsCube/CubeView.hh; sourceTree = "<group>"; };
 		E9871707150FE6CE0096089A /* CubeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CubeView.mm; path = TomsCube/CubeView.mm; sourceTree = "<group>"; };
-		E987170A151003010096089A /* ModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; name = ModelView.h; path = TomsCube/ModelView.h; sourceTree = "<group>"; };
-		E987170B151003010096089A /* ModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelView.m; path = TomsCube/ModelView.m; sourceTree = "<group>"; };
+		E987170A151003010096089A /* ModelView.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelView.hh; path = TomsCube/ModelView.hh; sourceTree = "<group>"; };
+		E987170B151003010096089A /* ModelView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ModelView.mm; path = TomsCube/ModelView.mm; sourceTree = "<group>"; };
 		E9AE4737150DDB0600146D3D /* TomsCube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomsCube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AE473B150DDB0600146D3D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E9AE473D150DDB0600146D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,10 +70,9 @@
 		E9AE474F150DDB0600146D3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E9AE4752150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		E9AE4755150DDB0600146D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		E9AE4757150DDB0600146D3D /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		E9AE4759150DDB0600146D3D /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		E9AE475B150DDB0600146D3D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E9AE475C150DDB0600146D3D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E9AE4757150DDB0600146D3D /* Boxes.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; name = Boxes.fsh; path = TomsCube/Shaders/Boxes.fsh; sourceTree = "<group>"; };
+		E9AE475B150DDB0600146D3D /* SceneView.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = SceneView.hh; path = TomsCube/SceneView.hh; sourceTree = "<group>"; };
+		E9AE475C150DDB0600146D3D /* SceneView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = SceneView.mm; path = TomsCube/SceneView.mm; sourceTree = "<group>"; };
 		E9AE4763150DDB0600146D3D /* TomsCubeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomsCubeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AE4764150DDB0600146D3D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E9AE476C150DDB0600146D3D /* TomsCubeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TomsCubeTests-Info.plist"; sourceTree = "<group>"; };
@@ -73,8 +80,8 @@
 		E9AE4770150DDB0600146D3D /* CubeModelTests.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CubeModelTests.hh; sourceTree = "<group>"; };
 		E9AE4771150DDB0600146D3D /* CubeModelTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CubeModelTests.mm; sourceTree = "<group>"; };
 		E9AE477B150DDF7F00146D3D /* CubeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CubeModel.h; path = TomsCube/CubeModel.h; sourceTree = "<group>"; };
-		E9AE4782150DF86300146D3D /* trackball.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trackball.c; sourceTree = "<group>"; };
-		E9AE4783150DF86300146D3D /* trackball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trackball.h; sourceTree = "<group>"; };
+		E9AE4782150DF86300146D3D /* trackball.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = trackball.c; path = TomsCube/trackball.c; sourceTree = "<group>"; };
+		E9AE4783150DF86300146D3D /* trackball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trackball.h; path = TomsCube/trackball.h; sourceTree = "<group>"; };
 		E9AE478D150E63F100146D3D /* CubeModel.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CubeModel.cc; path = TomsCube/CubeModel.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,22 +111,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E9871709151002DF0096089A /* Util */ = {
+		E94D35BF1510B00E00F52664 /* DemoCode */ = {
 			isa = PBXGroup;
 			children = (
-				E987170A151003010096089A /* ModelView.h */,
-				E987170B151003010096089A /* ModelView.m */,
+				E94D35CB1511331300F52664 /* SpinningBoxView.h */,
+				E94D35CC1511331300F52664 /* SpinningBoxView.m */,
 			);
-			name = Util;
+			name = DemoCode;
+			sourceTree = "<group>";
+		};
+		E94D35C01511234700F52664 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				E94D35C9151132C300F52664 /* Boxes.vsh */,
+				E94D35C7151132B700F52664 /* Phong.vsh */,
+				E9AE4757150DDB0600146D3D /* Boxes.fsh */,
+				E94D35D01511441600F52664 /* Phong.fsh */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		E9871709151002DF0096089A /* Graphics Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E9AE4782150DF86300146D3D /* trackball.c */,
+				E9AE4783150DF86300146D3D /* trackball.h */,
+				E987170A151003010096089A /* ModelView.hh */,
+				E987170B151003010096089A /* ModelView.mm */,
+				E9AE475B150DDB0600146D3D /* SceneView.hh */,
+				E9AE475C150DDB0600146D3D /* SceneView.mm */,
+			);
+			name = "Graphics Utils";
 			sourceTree = "<group>";
 		};
 		E9AE472C150DDB0500146D3D = {
 			isa = PBXGroup;
 			children = (
-				E9871709151002DF0096089A /* Util */,
+				E94D35C01511234700F52664 /* Shaders */,
+				E9871709151002DF0096089A /* Graphics Utils */,
 				E9E1A527150EC8610012CFF2 /* Cube */,
-				E9AE4745150DDB0600146D3D /* TomsCube */,
-				E9AE476A150DDB0600146D3D /* TomsCubeTests */,
+				E9AE4745150DDB0600146D3D /* Bullshit Apple Glue */,
+				E94D35BF1510B00E00F52664 /* DemoCode */,
+				E9AE476A150DDB0600146D3D /* Unit Tests */,
 				E9AE473A150DDB0600146D3D /* Frameworks */,
 				E9AE4738150DDB0600146D3D /* Products */,
 			);
@@ -147,27 +180,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E9AE4745150DDB0600146D3D /* TomsCube */ = {
+		E9AE4745150DDB0600146D3D /* Bullshit Apple Glue */ = {
 			isa = PBXGroup;
 			children = (
 				E9AE474E150DDB0600146D3D /* AppDelegate.h */,
 				E9AE474F150DDB0600146D3D /* AppDelegate.m */,
 				E9AE4751150DDB0600146D3D /* MainStoryboard_iPhone.storyboard */,
 				E9AE4754150DDB0600146D3D /* MainStoryboard_iPad.storyboard */,
-				E9AE4757150DDB0600146D3D /* Shader.fsh */,
-				E9AE4759150DDB0600146D3D /* Shader.vsh */,
-				E9AE475B150DDB0600146D3D /* ViewController.h */,
-				E9AE475C150DDB0600146D3D /* ViewController.m */,
 				E9AE4746150DDB0600146D3D /* Supporting Files */,
 			);
+			name = "Bullshit Apple Glue";
 			path = TomsCube;
 			sourceTree = "<group>";
 		};
 		E9AE4746150DDB0600146D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E9AE4782150DF86300146D3D /* trackball.c */,
-				E9AE4783150DF86300146D3D /* trackball.h */,
 				E9AE4747150DDB0600146D3D /* TomsCube-Info.plist */,
 				E9AE4748150DDB0600146D3D /* InfoPlist.strings */,
 				E9AE474B150DDB0600146D3D /* main.m */,
@@ -176,13 +204,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E9AE476A150DDB0600146D3D /* TomsCubeTests */ = {
+		E9AE476A150DDB0600146D3D /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
 				E9AE4770150DDB0600146D3D /* CubeModelTests.hh */,
 				E9AE4771150DDB0600146D3D /* CubeModelTests.mm */,
 				E9AE476B150DDB0600146D3D /* Supporting Files */,
 			);
+			name = "Unit Tests";
 			path = TomsCubeTests;
 			sourceTree = "<group>";
 		};
@@ -252,7 +281,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = Google;
+				ORGANIZATIONNAME = Espressobytes;
 			};
 			buildConfigurationList = E9AE4731150DDB0500146D3D /* Build configuration list for PBXProject "TomsCube" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -277,11 +306,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E94D35D21511442100F52664 /* Phong.fsh in Resources */,
+				E94D35CF151133C100F52664 /* Phong.vsh in Resources */,
+				E94D35CE151133BB00F52664 /* Boxes.vsh in Resources */,
 				E9AE474A150DDB0600146D3D /* InfoPlist.strings in Resources */,
 				E9AE4753150DDB0600146D3D /* MainStoryboard_iPhone.storyboard in Resources */,
 				E9AE4756150DDB0600146D3D /* MainStoryboard_iPad.storyboard in Resources */,
-				E9AE4758150DDB0600146D3D /* Shader.fsh in Resources */,
-				E9AE475A150DDB0600146D3D /* Shader.vsh in Resources */,
+				E9AE4758150DDB0600146D3D /* Boxes.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,11 +349,12 @@
 			files = (
 				E9AE474C150DDB0600146D3D /* main.m in Sources */,
 				E9AE4750150DDB0600146D3D /* AppDelegate.m in Sources */,
-				E9AE475D150DDB0600146D3D /* ViewController.m in Sources */,
+				E9AE475D150DDB0600146D3D /* SceneView.mm in Sources */,
 				E9AE4784150DF86300146D3D /* trackball.c in Sources */,
 				E9AE478F150E63F100146D3D /* CubeModel.cc in Sources */,
 				E9871708150FE6CE0096089A /* CubeView.mm in Sources */,
-				E987170C151003010096089A /* ModelView.m in Sources */,
+				E987170C151003010096089A /* ModelView.mm in Sources */,
+				E94D35CD1511331400F52664 /* SpinningBoxView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

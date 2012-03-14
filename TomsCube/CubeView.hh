@@ -10,14 +10,23 @@
 #import <GLKit/GLKit.h>
 
 #import "CubeModel.h"
+#import "ModelView.hh"
 
-@interface CubeView : NSObject {
+@interface CubeView : ModelView {
+  // Model
   Cube* _cube;
+  
+  // Shader attribs
   GLuint _vertexArray;
-  GLuint _vertexBuffer;
+  GLuint _vertexBuffers[2];
+  
+  // Shader uniforms
+  GLKMatrix4 _modelViewProjectionMatrix;
+  GLKMatrix3 _normalMatrix;
+  
+  // Animation parameters
+  float _rotation;
+  bool _colors_dirty;
 }
-@property (strong, nonatomic) EAGLContext* context;
-
-- (id) initWithContext:(EAGLContext*) context;
-- (void) draw;
+-(void) updateColorBuffer;
 @end

@@ -136,7 +136,7 @@ GLfloat color_pallet[] = {
   1.0, 1.0, 1.0,  // W
   1.0, 0.69, 0.0, // O
   1.0, 1.0, 0.0,  // Y
-  0.0, 0.37, 0.0,  // G
+  0.0, 0.37, 0.0, // G
   0.0, 0.0, 1.0,  // B
 };
 
@@ -229,7 +229,7 @@ enum
   GLKMatrix4 shrink_cube = GLKMatrix4MakeScale(0.5, 0.5, 0.5);
   
   GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(shrink_cube, position_cube);
-  modelViewMatrix = GLKMatrix4Multiply(rot_cube, modelViewMatrix);
+  //modelViewMatrix = GLKMatrix4Multiply(rot_cube, modelViewMatrix);
   
   modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
   
@@ -287,10 +287,17 @@ enum
   glUniform3fv(
        [self uniformWithName:(GLchar*)"ambientLight"], 1, _ambientLight.v);
   
+  [self draw];
+}
+
+- (void) draw
+{
   // my kingdom for GL_QUADS...
   glDrawArrays(GL_TRIANGLES, 0, 
                sizeof(gCubeVertices) / (6 * sizeof(gCubeVertices[0])));
+
 }
+
 
 
 @end

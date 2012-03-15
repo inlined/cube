@@ -34,6 +34,7 @@
 		E9AE4785150DF86300146D3D /* trackball.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AE4782150DF86300146D3D /* trackball.c */; };
 		E9AE478F150E63F100146D3D /* CubeModel.cc in Sources */ = {isa = PBXBuildFile; fileRef = E9AE478D150E63F100146D3D /* CubeModel.cc */; };
 		E9E1A53F150ED3AC0012CFF2 /* CubeModel.cc in Sources */ = {isa = PBXBuildFile; fileRef = E9AE478D150E63F100146D3D /* CubeModel.cc */; };
+		E9FAA4C415128D59004BD962 /* AnimationQueue.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9FAA4C315128D59004BD962 /* AnimationQueue.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		E9AE4782150DF86300146D3D /* trackball.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = trackball.c; path = TomsCube/trackball.c; sourceTree = "<group>"; };
 		E9AE4783150DF86300146D3D /* trackball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trackball.h; path = TomsCube/trackball.h; sourceTree = "<group>"; };
 		E9AE478D150E63F100146D3D /* CubeModel.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CubeModel.cc; path = TomsCube/CubeModel.cc; sourceTree = "<group>"; };
+		E9FAA4C215128D59004BD962 /* AnimationQueue.hh */ = {isa = PBXFileReference; fileEncoding = 4; path = AnimationQueue.hh; sourceTree = "<group>"; };
+		E9FAA4C315128D59004BD962 /* AnimationQueue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnimationQueue.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 		E94D35BF1510B00E00F52664 /* DemoCode */ = {
 			isa = PBXGroup;
 			children = (
+				E94D35C9151132C300F52664 /* Boxes.vsh */,
+				E9AE4757150DDB0600146D3D /* Boxes.fsh */,
 				E94D35CB1511331300F52664 /* SpinningBoxView.h */,
 				E94D35CC1511331300F52664 /* SpinningBoxView.m */,
 			);
@@ -123,9 +128,7 @@
 		E94D35C01511234700F52664 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				E94D35C9151132C300F52664 /* Boxes.vsh */,
 				E94D35C7151132B700F52664 /* Phong.vsh */,
-				E9AE4757150DDB0600146D3D /* Boxes.fsh */,
 				E94D35D01511441600F52664 /* Phong.fsh */,
 			);
 			name = Shaders;
@@ -231,6 +234,8 @@
 				E9AE478D150E63F100146D3D /* CubeModel.cc */,
 				E9871706150FE6CE0096089A /* CubeView.hh */,
 				E9871707150FE6CE0096089A /* CubeView.mm */,
+				E9FAA4C215128D59004BD962 /* AnimationQueue.hh */,
+				E9FAA4C315128D59004BD962 /* AnimationQueue.mm */,
 			);
 			name = Cube;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				E9871708150FE6CE0096089A /* CubeView.mm in Sources */,
 				E987170C151003010096089A /* ModelView.mm in Sources */,
 				E94D35CD1511331400F52664 /* SpinningBoxView.m in Sources */,
+				E9FAA4C415128D59004BD962 /* AnimationQueue.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,8 @@
 #import "CubeModel.h"
 #import "ModelView.hh"
 
+// TODO: Consider keeping one set of matrices and modifying the 
+// vertices themselves. It may be simpler or faster
 @interface CubeView : ModelView {
   // Model
   Cube* _cube;

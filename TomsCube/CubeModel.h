@@ -37,15 +37,17 @@ typedef enum {
 } WhichFace;
 
 typedef enum {
-    FRONT,
-    STANDING,
-    BACK,
-    UP,
-    EQUATOR,
-    DOWN,
-    LEFT,
-    MIDDLE,
-    RIGHT} Cubelet;
+  FRONT,
+  STANDING,
+  BACK,
+  UP,
+  EQUATOR,
+  DOWN,
+  LEFT,
+  MIDDLE,
+  RIGHT,
+  WHOLE_CUBE  // Used for animation codes.
+} Cubelet;
 typedef enum { NORMAL, PRIME } Twist;
 typedef enum { ROT_UP, ROT_DOWN, ROT_LEFT, ROT_RIGHT } Rotation;
 

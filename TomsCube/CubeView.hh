@@ -23,6 +23,7 @@
   // Shader uniforms
   GLKMatrix4 _modelViewProjectionMatrix;
   GLKMatrix3 _normalMatrix;
+  GLKVector3 _ambientLight;
   
   // Animation parameters
   float _rotation;

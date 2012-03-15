@@ -10,110 +10,138 @@
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-// format: XYZ position & normal of UL LL LR UR corners of each sticker in the
-// face enum order definied by the cube model
+#define FACING_CUBE_STICKER(minx, maxx, miny, maxy, z, normz) \
+  minx, maxy, z, 0, 0, normz, \
+  minx, miny, z, 0, 0, normz, \
+  maxx, maxy, z, 0, 0, normz, \
+  \
+  maxx, maxy, z, 0, 0, normz, \
+  minx, miny, z, 0, 0, normz, \
+  maxx, miny, z, 0, 0, normz
+
+#define LATERAL_CUBE_STICKER(x, miny, maxy, minz, maxz, normx) \
+  x, maxy, maxz, normx, 0, 0, \
+  x, miny, maxz, normx, 0, 0, \
+  x, maxy, minz, normx, 0, 0, \
+  \
+  x, maxy, minz, normx, 0, 0, \
+  x, miny, maxz, normx, 0, 0, \
+  x, miny, minz, normx, 0, 0
+
+#define VERTICAL_CUBE_STICKER(minx, maxx, y, minz, maxz, normy) \
+  minx, y, minz, 0, normy, 0, \
+  minx, y, maxz, 0, normy, 0, \
+  maxx, y, minz, 0, normy, 0, \
+  \
+  maxx, y, minz, 0, normy, 0, \
+  minx, y, maxz, 0, normy, 0, \
+  maxx, y, maxz, 0, normy, 0
+
+// format: XYZ position & normal of UL LL UR, UR, LL, LR triangles of each
+// sticker in the face enum order definied by the cube model
 GLfloat gCubeVertices[] = {
- // FRONT TOP
- 0, 3, 3, 0, 0, 1,   0, 2, 3, 0, 0, 1,   1, 2, 3, 0, 0, 1,   1, 3, 3, 0, 0, 1,
- 1, 3, 3, 0, 0, 1,   1, 2, 3, 0, 0, 1,   2, 2, 3, 0, 0, 1,   2, 3, 3, 0, 0, 1,
- 2, 3, 3, 0, 0, 1,   2, 2, 3, 0, 0, 1,   3, 2, 3, 0, 0, 1,   3, 3, 3, 0, 0, 1,
+  // FRONT TOP
+  FACING_CUBE_STICKER(0, 0.95, 2.05, 2.95, 3, 1),
+  FACING_CUBE_STICKER(1.05, 1.95, 2.05, 2.95, 3, 1),
+  FACING_CUBE_STICKER(2.05, 2.95, 2.05, 2.95, 3, 1),
   
- // FRONT EQUATOR
- 0, 2, 3, 0, 0, 1,   0, 1, 3, 0, 0, 1,   1, 1, 3, 0, 0, 1,   1, 2, 3, 0, 0, 1,
- 1, 2, 3, 0, 0, 1,   1, 1, 3, 0, 0, 1,   2, 1, 3, 0, 0, 1,   2, 2, 3, 0, 0, 1,
- 2, 2, 3, 0, 0, 1,   2, 1, 3, 0, 0, 1,   3, 1, 3, 0, 0, 1,   3, 2, 3, 0, 0, 1,
+  // FRONT EQUATOR
+  FACING_CUBE_STICKER(0, 0.95, 1.05, 1.95, 3, 1),
+  FACING_CUBE_STICKER(1.05, 1.95, 1.05, 1.95, 3, 1),
+  FACING_CUBE_STICKER(2.05, 2.95, 1.05, 1.95, 3, 1),
   
- // FRONT BOTTOM
- 0, 1, 3, 0, 0, 1,   0, 0, 3, 0, 0, 1,   1, 0, 0, 0, 0, 1,   1, 1, 0, 0, 0, 1,
- 1, 1, 3, 0, 0, 1,   1, 0, 3, 0, 0, 1,   2, 0, 0, 0, 0, 1,   2, 1, 0, 0, 0, 1,
- 2, 1, 3, 0, 0, 1,   2, 0, 3, 0, 0, 1,   3, 0, 0, 0, 0, 1,   3, 1, 0, 0, 0, 1,
+  // FRONT BOTTOM
+  FACING_CUBE_STICKER(0, 0.95, 0.05, 0.95, 3, 1),
+  FACING_CUBE_STICKER(1.05, 1.95, 0.05, 0.95, 3, 1),
+  FACING_CUBE_STICKER(2.05, 2.95, 0.05, 0.95, 3, 1),
+
+  // RIGHT TOP
+  LATERAL_CUBE_STICKER(3, 2.05, 2.95, 2.05, 2.95, 1),
+  LATERAL_CUBE_STICKER(3, 2.05, 2.95, 1.05, 1.95, 1),
+  LATERAL_CUBE_STICKER(3, 2.05, 2.95, 0.05, 0.95, 1),
   
- // RIGHT TOP
- 3, 3, 3, 1, 0, 0,   3, 2, 3, 1, 0, 0,   3, 2, 2, 1, 0, 0,   3, 3, 2, 1, 0, 0,
- 3, 3, 2, 1, 0, 0,   3, 2, 2, 1, 0, 0,   3, 2, 1, 1, 0, 0,   3, 3, 1, 1, 0, 0,
- 3, 3, 1, 1, 0, 0,   3, 2, 1, 1, 0, 0,   3, 2, 0, 1, 0, 0,   3, 3, 0, 1, 0, 0,
+  // RIGHT EQUATOR
+  LATERAL_CUBE_STICKER(3, 1.05, 1.95, 2.05, 2.95, 1),
+  LATERAL_CUBE_STICKER(3, 1.05, 1.95, 1.05, 1.95, 1),
+  LATERAL_CUBE_STICKER(3, 1.05, 1.95, 0.05, 0.95, 1),
   
- // RIGHT EQUATOR
- 3, 2, 3, 1, 0, 0,   3, 1, 3, 1, 0, 0,   3, 1, 2, 1, 0, 0,   3, 2, 2, 1, 0, 0,
- 3, 2, 2, 1, 0, 0,   3, 1, 2, 1, 0, 0,   3, 1, 1, 1, 0, 0,   3, 2, 1, 1, 0, 0,
- 3, 2, 1, 1, 0, 0,   3, 1, 1, 1, 0, 0,   3, 1, 0, 1, 0, 0,   3, 2, 0, 1, 0, 0,
-
- // RIGHT BOTTOM
- 3, 1, 3, 1, 0, 0,   3, 0, 3, 1, 0, 0,   3, 0, 2, 1, 0, 0,   3, 1, 2, 1, 0, 0,
- 3, 1, 2, 1, 0, 0,   3, 0, 2, 1, 0, 0,   3, 0, 1, 1, 0, 0,   3, 1, 1, 1, 0, 0,
- 3, 1, 1, 1, 0, 0,   3, 0, 1, 1, 0, 0,   3, 0, 0, 1, 0, 0,   3, 1, 0, 1, 0, 0,
-
- // BACK TOP
- 3, 3, 0, 0, 0, -1,  3, 2, 0, 0, 0, -1,  2, 2, 0, 0, 0, -1,  2, 3, 0, 0, 0, -1,
- 2, 3, 0, 0, 0, -1,  2, 2, 0, 0, 0, -1,  1, 2, 0, 0, 0, -1,  1, 3, 0, 0, 0, -1,
- 1, 3, 0, 0, 0, -1,  1, 2, 0, 0, 0, -1,  0, 2, 0, 0, 0, -1,  0, 3, 0, 0, 0, -1,  
+  // RIGHT BOTTOM
+  LATERAL_CUBE_STICKER(3, 0.05, 0.95, 2.05, 2.95, 1),
+  LATERAL_CUBE_STICKER(3, 0.05, 0.95, 1.05, 1.95, 1),
+  LATERAL_CUBE_STICKER(3, 0.05, 0.95, 0.05, 0.95, 1),
   
- // BACK EQUATOR
- 3, 2, 0, 0, 0, -1,  3, 1, 0, 0, 0, -1,  2, 1, 0, 0, 0, -1,  2, 2, 0, 0, 0, -1,
- 2, 2, 0, 0, 0, -1,  2, 1, 0, 0, 0, -1,  1, 1, 0, 0, 0, -1,  1, 2, 0, 0, 0, -1,
- 1, 2, 0, 0, 0, -1,  1, 1, 0, 0, 0, -1,  0, 1, 0, 0, 0, -1,  0, 2, 0, 0, 0, -1,  
-
- // BACK BOTTOM
- 3, 1, 0, 0, 0, -1,  3, 0, 0, 0, 0, -1,  2, 0, 0, 0, 0, -1,  2, 1, 0, 0, 0, -1,
- 2, 1, 0, 0, 0, -1,  2, 0, 0, 0, 0, -1,  1, 0, 0, 0, 0, -1,  1, 1, 0, 0, 0, -1,
- 1, 1, 0, 0, 0, -1,  1, 0, 0, 0, 0, -1,  0, 0, 0, 0, 0, -1,  0, 1, 0, 0, 0, -1,  
-
- // LEFT TOP
- 3, 3, 0, -1, 0, 0,  3, 2, 0, -1, 0, 0,  3, 2, 1, -1, 0, 0,  3, 3, 1, -1, 0, 0,
- 3, 3, 1, -1, 0, 0,  3, 2, 1, -1, 0, 0,  3, 2, 2, -1, 0, 0,  3, 3, 2, -1, 0, 0,
- 3, 3, 2, -1, 0, 0,  3, 2, 2, -1, 0, 0,  3, 2, 3, -1, 0, 0,  3, 3, 3, -1, 0, 0,
-
- // LEFT EQUATOR
- 3, 2, 0, -1, 0, 0,  3, 1, 0, -1, 0, 0,  3, 1, 1, -1, 0, 0,  3, 2, 1, -1, 0, 0,
- 3, 2, 1, -1, 0, 0,  3, 1, 1, -1, 0, 0,  3, 1, 2, -1, 0, 0,  3, 2, 2, -1, 0, 0,
- 3, 2, 2, -1, 0, 0,  3, 1, 2, -1, 0, 0,  3, 1, 3, -1, 0, 0,  3, 2, 3, -1, 0, 0,
-
- // LEFT BOTTOM
- 3, 1, 0, -1, 0, 0,  3, 0, 0, -1, 0, 0,  3, 0, 1, -1, 0, 0,  3, 1, 1, -1, 0, 0,
- 3, 1, 1, -1, 0, 0,  3, 0, 1, -1, 0, 0,  3, 0, 2, -1, 0, 0,  3, 1, 2, -1, 0, 0,
- 3, 1, 2, -1, 0, 0,  3, 0, 2, -1, 0, 0,  3, 0, 3, -1, 0, 0,  3, 1, 3, -1, 0, 0,
-
- // TOP BACK
- 0, 3, 0, 0, 1, 0,   0, 3, 1, 0, 1, 0,   1, 3, 1, 0, 1, 0,   1, 3, 0, 0, 1, 0,
- 1, 3, 0, 0, 1, 0,   1, 3, 1, 0, 1, 0,   2, 3, 1, 0, 1, 0,   2, 3, 0, 0, 1, 0, 
- 2, 3, 0, 0, 1, 0,   2, 3, 1, 0, 1, 0,   3, 3, 1, 0, 1, 0,   3, 3, 0, 0, 1, 0, 
-
- // TOP STANDING
- 0, 3, 1, 0, 1, 0,   0, 3, 2, 0, 1, 0,   1, 3, 2, 0, 1, 0,   1, 3, 1, 0, 1, 0,
- 1, 3, 1, 0, 1, 0,   1, 3, 2, 0, 1, 0,   2, 3, 2, 0, 1, 0,   2, 3, 1, 0, 1, 0, 
- 2, 3, 1, 0, 1, 0,   2, 3, 2, 0, 1, 0,   3, 3, 2, 0, 1, 0,   3, 3, 1, 0, 1, 0, 
-
- // TOP FRONT
- 0, 3, 2, 0, 1, 0,   0, 3, 3, 0, 1, 0,   1, 3, 3, 0, 1, 0,   1, 3, 2, 0, 1, 0,
- 1, 3, 2, 0, 1, 0,   1, 3, 3, 0, 1, 0,   2, 3, 3, 0, 1, 0,   2, 3, 2, 0, 1, 0, 
- 2, 3, 2, 0, 1, 0,   2, 3, 3, 0, 1, 0,   3, 3, 3, 0, 1, 0,   3, 3, 2, 0, 1, 0, 
-
- // BOTTOM FRONT
- 0, 0, 3, 0, -1, 0,  0, 0, 2, 0, -1, 0,  1, 0, 2, 0, -1, 0,  1, 0, 3, 0, -1, 0,
- 1, 0, 3, 0, -1, 0,  1, 0, 2, 0, -1, 0,  2, 0, 2, 0, -1, 0,  2, 0, 3, 0, -1, 0,
- 2, 0, 3, 0, -1, 0,  2, 0, 2, 0, -1, 0,  3, 0, 2, 0, -1, 0,  3, 0, 3, 0, -1, 0,
+  // BACK TOP
+  FACING_CUBE_STICKER(2.05, 2.95, 2.05, 2.95, 0, -1), 
+  FACING_CUBE_STICKER(1.05, 1.95, 2.05, 2.95, 0, -1),
+  FACING_CUBE_STICKER(0.05, 0.95, 2.05, 2.95, 0, -1),
   
- // BOTTOM STANDING
- 0, 0, 2, 0, -1, 0,  0, 0, 1, 0, -1, 0,  1, 0, 1, 0, -1, 0,  1, 0, 2, 0, -1, 0,
- 1, 0, 2, 0, -1, 0,  1, 0, 1, 0, -1, 0,  2, 0, 1, 0, -1, 0,  2, 0, 2, 0, -1, 0,
- 2, 0, 2, 0, -1, 0,  2, 0, 1, 0, -1, 0,  3, 0, 1, 0, -1, 0,  3, 0, 2, 0, -1, 0,
-
- // BOTTOM BACK
- 0, 0, 1, 0, -1, 0,  0, 0, 0, 0, -1, 0,  1, 0, 0, 0, -1, 0,  1, 0, 1, 0, -1, 0,
- 1, 0, 1, 0, -1, 0,  1, 0, 0, 0, -1, 0,  2, 0, 0, 0, -1, 0,  2, 0, 1, 0, -1, 0,
- 2, 0, 1, 0, -1, 0,  2, 0, 0, 0, -1, 0,  3, 0, 0, 0, -1, 0,  3, 0, 1, 0, -1, 0,
+  // BACK EQUATOR
+  FACING_CUBE_STICKER(2.05, 2.95, 1.05, 1.95, 0, -1), 
+  FACING_CUBE_STICKER(1.05, 1.95, 1.05, 1.95, 0, -1),
+  FACING_CUBE_STICKER(0.05, 0.95, 1.05, 1.95, 0, -1),
+   
+  // BACK BOTTOM
+  FACING_CUBE_STICKER(2.05, 2.95, 0.05, 0.95, 0, -1), 
+  FACING_CUBE_STICKER(1.05, 1.95, 0.05, 0.95, 0, -1),
+  FACING_CUBE_STICKER(0.05, 0.95, 0.05, 0.95, 0, -1),
+  
+  // LEFT TOP
+  LATERAL_CUBE_STICKER(0, 2.05, 2.95, 2.05, 2.95, -1),
+  LATERAL_CUBE_STICKER(0, 2.05, 2.95, 1.05, 1.95, -1),
+  LATERAL_CUBE_STICKER(0, 2.05, 2.95, 0.05, 0.95, -1), 
+  
+  // LEFT EQUATOR
+  LATERAL_CUBE_STICKER(0, 1.05, 1.95, 2.05, 2.95, -1),
+  LATERAL_CUBE_STICKER(0, 1.05, 1.95, 1.05, 1.95, -1),
+  LATERAL_CUBE_STICKER(0, 1.05, 1.95, 0.05, 0.95, -1), 
+   
+  // LEFT BOTTOM
+  LATERAL_CUBE_STICKER(0, 0.05, 0.95, 2.05, 2.95, -1),
+  LATERAL_CUBE_STICKER(0, 0.05, 0.95, 1.05, 1.95, -1),
+  LATERAL_CUBE_STICKER(0, 0.05, 0.95, 0.05, 0.95, -1), 
+ 
+  // TOP BACK
+  VERTICAL_CUBE_STICKER(0.05, 0.95, 3, 0.05, 0.95, 1),
+  VERTICAL_CUBE_STICKER(1.05, 1.95, 3, 0.05, 0.95, 1),
+  VERTICAL_CUBE_STICKER(2.05, 2.95, 3, 0.05, 0.95, 1),
+  
+  // TOP STANDING
+  VERTICAL_CUBE_STICKER(0.05, 0.95, 3, 1.05, 1.95, 1),
+  VERTICAL_CUBE_STICKER(1.05, 1.95, 3, 1.05, 1.95, 1),
+  VERTICAL_CUBE_STICKER(2.05, 2.95, 3, 1.05, 1.95, 1),
+   
+  // TOP FRONT
+  VERTICAL_CUBE_STICKER(0.05, 0.95, 3, 2.05, 2.95, 1),
+  VERTICAL_CUBE_STICKER(1.05, 1.95, 3, 2.05, 2.95, 1),
+  VERTICAL_CUBE_STICKER(2.05, 2.95, 3, 2.05, 2.95, 1), 
+  
+  // BOTTOM FRONT
+  VERTICAL_CUBE_STICKER(0.05, 0.95, 0, 2.05, 2.95, -1),
+  VERTICAL_CUBE_STICKER(1.05, 1.95, 0, 2.05, 2.95, -1),
+  VERTICAL_CUBE_STICKER(2.05, 2.95, 0, 2.05, 2.95, -1),
+  
+  // BOTTOM STANDING
+  VERTICAL_CUBE_STICKER(0.05, 0.95, 0, 1.05, 1.95, -1),
+  VERTICAL_CUBE_STICKER(1.05, 1.95, 0, 1.05, 1.95, -1),
+  VERTICAL_CUBE_STICKER(2.05, 2.95, 0, 1.05, 1.95, -1),
+  
+  // BOTTOM BACK
+  VERTICAL_CUBE_STICKER(0.05, 0.95, 0, 0.05, 0.95, -1),
+  VERTICAL_CUBE_STICKER(1.05, 1.95, 0, 0.05, 0.95, -1),
+  VERTICAL_CUBE_STICKER(2.05, 2.95, 0, 0.05, 0.95, -1),
 };
 
 GLfloat color_pallet[] = {
-  1.0, 0.0, 0.0,  // R
+  0.8, 0.0, 0.0,  // R
   1.0, 1.0, 1.0,  // W
   1.0, 0.69, 0.0, // O
   1.0, 1.0, 0.0,  // Y
-  0.0, 1.0, 0.0,  // G
+  0.0, 0.37, 0.0,  // G
   0.0, 0.0, 1.0,  // B
 };
 
-GLfloat colors[648];
+// Color elements per vertex per square per face per cube
+GLfloat colors[3 * 3 * 2 * 9 * 6];
 
 // Attribute index.
 enum
@@ -154,26 +182,27 @@ enum
   glBindVertexArrayOES(_vertexArray);
   glGenBuffers(2, _vertexBuffers);
   
-  // Create a mapping between gCubeVertexData and the first spot in the VAO
+  // Create a mapping between gCubeVertecies and the first spot in the VAO
+  // This buffer holds a static map of interleaved positions and normals.
   glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffers[0]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(gCubeVertices), gCubeVertices, GL_STATIC_DRAW);
   
-  // Describe gCubeVertexData as vertex positions every 24B starting at offset 0
+  // Every cycle of 24B starting at offset 0 is a 3 float vector of positions
   glEnableVertexAttribArray(GLKVertexAttribPosition);
   glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
   
-  // Describe gCubeData as vertex normals every 24B starting at offset 12
+  // Every cycle of 24B starting at offset 12 is a 3 flaot vector of normals
   glEnableVertexAttribArray(GLKVertexAttribNormal);
   glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
   
-  // In the other buffer, bind the byte indicies for colors
+  // In the other buffer, bind a dynamic vector of colors per vertex
   glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffers[1]);
   [self updateColorBuffer];
   
   // 16 is just a non-reserved value
   glEnableVertexAttribArray(GLKVertexAttribColor);
   glVertexAttribPointer(GLKVertexAttribColor,
-                        4, GL_FLOAT, GL_FALSE, 0, 0);
+                        3, GL_FLOAT, GL_FALSE, 0, 0);
   
   // Unset the active VAO so other code cannot mess this up
   glBindVertexArrayOES(0);
@@ -192,13 +221,19 @@ enum
   
   // TODO: Is the camera no longer here? This probably needs to be rethought
   // and refactored for proper object composition
-  GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
-  baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
+    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
   
-  GLKMatrix4 modelViewMatrix = GLKMatrix4MakeRotation(_rotation, 1.0f, 1.0f, 1.0f);
+  GLKMatrix4 rot_cube =
+      GLKMatrix4MakeRotation(_rotation, 1.0f, 1.0f, 1.0f);
+  GLKMatrix4 position_cube = GLKMatrix4MakeTranslation(-1.5, -1.5, -1.5);
+  GLKMatrix4 shrink_cube = GLKMatrix4MakeScale(0.5, 0.5, 0.5);
+  
+  GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(shrink_cube, position_cube);
+  modelViewMatrix = GLKMatrix4Multiply(rot_cube, modelViewMatrix);
+  
   modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
   
-  // TOM CONFUSION: what exactly is this? The shader has a fixed clight position.
+  // TOM CONFUSION: what exactly is this? The shader has a fixed clieht position.
   // This seems to be related to the camera so that model view normals are 
   // transformed to global normals
   _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
@@ -209,6 +244,7 @@ enum
   
   _rotation += self.scene.timeSinceLastUpdate * 0.5f;
   
+  _ambientLight = GLKVector3Make(0.1, 0.1, 0.1);
   if (_colors_dirty) {
       [self updateColorBuffer];
   }
@@ -218,16 +254,14 @@ enum
 {
   _colors_dirty = NO;
   // Bit blast the color buffer
-  for (WhichFace face_id = FRONT_FACE; face_id < NUM_FACES; ++face_id) {
-    Cube::Face face = _cube->GetFace(face_id);
-    for (int square = 0; square < 9; ++square) {
-      GLfloat* color = &color_pallet[3 * face[square]];
-      for (int vertex = 0; vertex < 4; ++vertex) {
-        int index = (vertex + face_id * 6) * 3;
-        colors[index] = color[0];
-        colors[index + 1] = color[1];
-        colors[index + 2] = color[2];
-      }
+  for (int sticker = 0; sticker < 9 * 6; ++sticker) {
+    Color color_code = _cube->raw_buffer()[sticker];
+    GLfloat* color3v = &color_pallet[3 * color_code];
+    for (int vertex = 0; vertex < 6; ++vertex) {
+      GLfloat* buffer = &colors[(sticker * 6 + vertex) * 3];
+      buffer[0] = color3v[0];
+      buffer[1] = color3v[1];
+      buffer[2] = color3v[2];
     }
   }
   // Assume we are already using this model's VAO
@@ -241,21 +275,21 @@ enum
   glBindVertexArrayOES(_vertexArray);
   
   
-  // Render the object again with ES2
   glUseProgram(self.program);
   
-  
   // Assign our calculated uniforms to the pipeline
-  glUniformMatrix4fv([self uniformWithName:"modelViewProjectionMatrix"],
-                     1, 0, _modelViewProjectionMatrix.m);
-  glUniformMatrix3fv([self uniformWithName:"normalMatrix"],
-                     1, 0, _normalMatrix.m);
+  glUniformMatrix4fv(
+      [self uniformWithName:(GLchar*)"modelViewProjectionMatrix"],
+      1, 0, _modelViewProjectionMatrix.m);
+  glUniformMatrix3fv(
+      [self uniformWithName:(GLchar*)"normalMatrix"],
+      1, 0, _normalMatrix.m);
+  glUniform3fv(
+       [self uniformWithName:(GLchar*)"ambientLight"], 1, _ambientLight.v);
   
-  for (int face = 0; face < 6; ++face) {
-    for (int square = 0; square < 9; ++square) {
-      glDrawArrays(GL_LINE_LOOP, (face * 9 + square) * 4, 4);
-    }
-  }
+  // my kingdom for GL_QUADS...
+  glDrawArrays(GL_TRIANGLES, 0, 
+               sizeof(gCubeVertices) / (6 * sizeof(gCubeVertices[0])));
 }
 
 

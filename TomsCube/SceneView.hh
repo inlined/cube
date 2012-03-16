@@ -10,7 +10,9 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-@interface SceneView : GLKViewController
+@interface SceneView : GLKViewController {
+  bool _aspectRatioDirty;
+}
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 

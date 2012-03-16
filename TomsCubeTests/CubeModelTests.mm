@@ -220,6 +220,41 @@ NSString* nameForFace(WhichFace face) {
   CHECK_FACE(LEFT_FACE, 0, ORANGE);
 }
 
+- (void) testRotLeft
+{
+  c->Rotate(ROT_LEFT);
+  CHECK_FACE(FRONT_FACE, 0, WHITE);
+}
+
+- (void)testRotRight
+{
+  c->Rotate(ROT_RIGHT);
+  CHECK_FACE(FRONT_FACE, 0, YELLOW);
+}
+
+- (void)testTwistUp
+{
+  CHECK_FACE(FRONT_FACE, 0, RED);
+  CHECK_FACE(BACK_FACE, 0, ORANGE);
+  CHECK_FACE(LEFT_FACE, 0, YELLOW);
+  CHECK_FACE(RIGHT_FACE, 0, WHITE);
+  c->Twist(UP, PRIME);
+  CHECK_FACE(RIGHT_FACE, 0, RED);
+  CHECK_FACE(BACK_FACE, 0, WHITE);
+  CHECK_FACE(LEFT_FACE, 0, ORANGE);
+  CHECK_FACE(FRONT_FACE, 0, YELLOW);
+  c->Twist(UP, NORMAL);
+  CHECK_FACE(FRONT_FACE, 0, RED);
+  CHECK_FACE(BACK_FACE, 0, ORANGE);
+  CHECK_FACE(LEFT_FACE, 0, YELLOW);
+  CHECK_FACE(RIGHT_FACE, 0, WHITE);
+  c->Twist(UP, NORMAL);
+  CHECK_FACE(LEFT_FACE, 0, RED);
+  CHECK_FACE(FRONT_FACE, 0, WHITE);
+  CHECK_FACE(RIGHT_FACE, 0, ORANGE);
+  CHECK_FACE(BACK_FACE, 0, YELLOW);
+}
+
 - (void) testTwistSymmetry
 {
   // Simple prime functions

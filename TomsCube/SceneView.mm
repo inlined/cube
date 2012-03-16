@@ -29,7 +29,6 @@
   [super viewDidLoad];
   
   self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-  
   if (!self.context) {
     NSLog(@"Failed to create ES context");
   }
@@ -61,11 +60,13 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+  BOOL will_turn;
   if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    will_turn = (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
   } else {
-    return YES;
+    will_turn = YES;
   }
+  return _aspectRatioDirty = will_turn;
 }
 
 - (void)setupGL
@@ -80,6 +81,7 @@
   self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 1.0f, 1.0f, 1.0f);
   
   glEnable(GL_DEPTH_TEST);
+  _aspectRatioDirty = YES;
 }
 
 - (void)tearDownGL
@@ -93,11 +95,15 @@
 
 - (void)update
 {
-  float aspect = fabsf(self.view.bounds.size.width / 
-                       self.view.bounds.size.height);
-  GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
-  
-  self.effect.transform.projectionMatrix = projectionMatrix;
+  if (_aspectRatioDirty) {
+    NSLog(@"Recalculating projection matrix");
+    _aspectRatioDirty = NO;
+    float aspect = fabsf(self.view.bounds.size.width / 
+                         self.view.bounds.size.height);
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+    
+    self.effect.transform.projectionMatrix = projectionMatrix;
+  }
   [_model_view update];
 }
 

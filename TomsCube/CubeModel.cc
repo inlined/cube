@@ -140,6 +140,7 @@ void Cube::Rotate(Rotation direction) {
       CopyFace(left, temp);
       RotateFaceCW(top);
       RotateFaceCCW(bottom);
+      break;
       
     case ROT_RIGHT:
       CopyFace(temp, front);
@@ -149,6 +150,7 @@ void Cube::Rotate(Rotation direction) {
       CopyFace(right, temp);
       RotateFaceCW(bottom);
       RotateFaceCCW(top);
+      break;
   };
 }
 

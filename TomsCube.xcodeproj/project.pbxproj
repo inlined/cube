@@ -11,6 +11,7 @@
 		E94D35CE151133BB00F52664 /* Boxes.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E94D35C9151132C300F52664 /* Boxes.vsh */; };
 		E94D35CF151133C100F52664 /* Phong.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E94D35C7151132B700F52664 /* Phong.vsh */; };
 		E94D35D21511442100F52664 /* Phong.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E94D35D01511441600F52664 /* Phong.fsh */; };
+		E981B2B41512C50600176A1B /* NSInvocation+Shorthand.m in Sources */ = {isa = PBXBuildFile; fileRef = E981B2B31512C50600176A1B /* NSInvocation+Shorthand.m */; };
 		E9871708150FE6CE0096089A /* CubeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9871707150FE6CE0096089A /* CubeView.mm */; };
 		E987170C151003010096089A /* ModelView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E987170B151003010096089A /* ModelView.mm */; };
 		E9AE473C150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
@@ -34,7 +35,7 @@
 		E9AE4785150DF86300146D3D /* trackball.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AE4782150DF86300146D3D /* trackball.c */; };
 		E9AE478F150E63F100146D3D /* CubeModel.cc in Sources */ = {isa = PBXBuildFile; fileRef = E9AE478D150E63F100146D3D /* CubeModel.cc */; };
 		E9E1A53F150ED3AC0012CFF2 /* CubeModel.cc in Sources */ = {isa = PBXBuildFile; fileRef = E9AE478D150E63F100146D3D /* CubeModel.cc */; };
-		E9FAA4C415128D59004BD962 /* AnimationQueue.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9FAA4C315128D59004BD962 /* AnimationQueue.mm */; };
+		E9FAA4C415128D59004BD962 /* AnimationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FAA4C315128D59004BD962 /* AnimationQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,9 @@
 		E94D35CB1511331300F52664 /* SpinningBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpinningBoxView.h; path = TomsCube/SpinningBoxView.h; sourceTree = "<group>"; };
 		E94D35CC1511331300F52664 /* SpinningBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpinningBoxView.m; path = TomsCube/SpinningBoxView.m; sourceTree = "<group>"; };
 		E94D35D01511441600F52664 /* Phong.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Phong.fsh; sourceTree = "<group>"; };
+		E981B2B21512C50600176A1B /* NSInvocation+Shorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+Shorthand.h"; path = "TomsCube/NSInvocation+Shorthand.h"; sourceTree = "<group>"; };
+		E981B2B31512C50600176A1B /* NSInvocation+Shorthand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+Shorthand.m"; path = "TomsCube/NSInvocation+Shorthand.m"; sourceTree = "<group>"; };
+		E981B2B51512C54A00176A1B /* CubeEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeEnums.h; sourceTree = "<group>"; };
 		E9871706150FE6CE0096089A /* CubeView.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CubeView.hh; path = TomsCube/CubeView.hh; sourceTree = "<group>"; };
 		E9871707150FE6CE0096089A /* CubeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CubeView.mm; path = TomsCube/CubeView.mm; sourceTree = "<group>"; };
 		E987170A151003010096089A /* ModelView.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelView.hh; path = TomsCube/ModelView.hh; sourceTree = "<group>"; };
@@ -84,8 +88,8 @@
 		E9AE4782150DF86300146D3D /* trackball.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = trackball.c; path = TomsCube/trackball.c; sourceTree = "<group>"; };
 		E9AE4783150DF86300146D3D /* trackball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trackball.h; path = TomsCube/trackball.h; sourceTree = "<group>"; };
 		E9AE478D150E63F100146D3D /* CubeModel.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CubeModel.cc; path = TomsCube/CubeModel.cc; sourceTree = "<group>"; };
-		E9FAA4C215128D59004BD962 /* AnimationQueue.hh */ = {isa = PBXFileReference; fileEncoding = 4; path = AnimationQueue.hh; sourceTree = "<group>"; };
-		E9FAA4C315128D59004BD962 /* AnimationQueue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnimationQueue.mm; sourceTree = "<group>"; };
+		E9FAA4C215128D59004BD962 /* AnimationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AnimationQueue.h; sourceTree = "<group>"; };
+		E9FAA4C315128D59004BD962 /* AnimationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationQueue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +138,7 @@
 			name = Shaders;
 			sourceTree = "<group>";
 		};
-		E9871709151002DF0096089A /* Graphics Utils */ = {
+		E9871709151002DF0096089A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				E9AE4782150DF86300146D3D /* trackball.c */,
@@ -143,15 +147,17 @@
 				E987170B151003010096089A /* ModelView.mm */,
 				E9AE475B150DDB0600146D3D /* SceneView.hh */,
 				E9AE475C150DDB0600146D3D /* SceneView.mm */,
+				E981B2B21512C50600176A1B /* NSInvocation+Shorthand.h */,
+				E981B2B31512C50600176A1B /* NSInvocation+Shorthand.m */,
 			);
-			name = "Graphics Utils";
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		E9AE472C150DDB0500146D3D = {
 			isa = PBXGroup;
 			children = (
 				E94D35C01511234700F52664 /* Shaders */,
-				E9871709151002DF0096089A /* Graphics Utils */,
+				E9871709151002DF0096089A /* Utils */,
 				E9E1A527150EC8610012CFF2 /* Cube */,
 				E9AE4745150DDB0600146D3D /* Bullshit Apple Glue */,
 				E94D35BF1510B00E00F52664 /* DemoCode */,
@@ -234,8 +240,9 @@
 				E9AE478D150E63F100146D3D /* CubeModel.cc */,
 				E9871706150FE6CE0096089A /* CubeView.hh */,
 				E9871707150FE6CE0096089A /* CubeView.mm */,
-				E9FAA4C215128D59004BD962 /* AnimationQueue.hh */,
-				E9FAA4C315128D59004BD962 /* AnimationQueue.mm */,
+				E9FAA4C215128D59004BD962 /* AnimationQueue.h */,
+				E9FAA4C315128D59004BD962 /* AnimationQueue.m */,
+				E981B2B51512C54A00176A1B /* CubeEnums.h */,
 			);
 			name = Cube;
 			sourceTree = "<group>";
@@ -360,7 +367,8 @@
 				E9871708150FE6CE0096089A /* CubeView.mm in Sources */,
 				E987170C151003010096089A /* ModelView.mm in Sources */,
 				E94D35CD1511331400F52664 /* SpinningBoxView.m in Sources */,
-				E9FAA4C415128D59004BD962 /* AnimationQueue.mm in Sources */,
+				E9FAA4C415128D59004BD962 /* AnimationQueue.m in Sources */,
+				E981B2B41512C50600176A1B /* NSInvocation+Shorthand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

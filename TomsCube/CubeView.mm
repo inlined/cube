@@ -7,6 +7,7 @@
 //
 
 #import "CubeView.hh"
+#import "NSInvocation+Shorthand.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -41,17 +42,17 @@
 // sticker in the face enum order definied by the cube model
 GLfloat gCubeVertices[] = {
   // FRONT TOP
-  FACING_CUBE_STICKER(0, 0.95, 2.05, 2.95, 3, 1),
+  FACING_CUBE_STICKER(0.05, 0.95, 2.05, 2.95, 3, 1),
   FACING_CUBE_STICKER(1.05, 1.95, 2.05, 2.95, 3, 1),
   FACING_CUBE_STICKER(2.05, 2.95, 2.05, 2.95, 3, 1),
   
   // FRONT EQUATOR
-  FACING_CUBE_STICKER(0, 0.95, 1.05, 1.95, 3, 1),
+  FACING_CUBE_STICKER(0.05, 0.95, 1.05, 1.95, 3, 1),
   FACING_CUBE_STICKER(1.05, 1.95, 1.05, 1.95, 3, 1),
   FACING_CUBE_STICKER(2.05, 2.95, 1.05, 1.95, 3, 1),
   
   // FRONT BOTTOM
-  FACING_CUBE_STICKER(0, 0.95, 0.05, 0.95, 3, 1),
+  FACING_CUBE_STICKER(0.05, 0.95, 0.05, 0.95, 3, 1),
   FACING_CUBE_STICKER(1.05, 1.95, 0.05, 0.95, 3, 1),
   FACING_CUBE_STICKER(2.05, 2.95, 0.05, 0.95, 3, 1),
 
@@ -86,19 +87,19 @@ GLfloat gCubeVertices[] = {
   FACING_CUBE_STICKER(0.05, 0.95, 0.05, 0.95, 0, -1),
   
   // LEFT TOP
-  LATERAL_CUBE_STICKER(0, 2.05, 2.95, 2.05, 2.95, -1),
+  LATERAL_CUBE_STICKER(0, 2.05, 2.95, 0.05, 0.95, -1),
   LATERAL_CUBE_STICKER(0, 2.05, 2.95, 1.05, 1.95, -1),
-  LATERAL_CUBE_STICKER(0, 2.05, 2.95, 0.05, 0.95, -1), 
+  LATERAL_CUBE_STICKER(0, 2.05, 2.95, 2.05, 2.95, -1), 
   
   // LEFT EQUATOR
-  LATERAL_CUBE_STICKER(0, 1.05, 1.95, 2.05, 2.95, -1),
+  LATERAL_CUBE_STICKER(0, 1.05, 1.95, 0.05, 0.95, -1),
   LATERAL_CUBE_STICKER(0, 1.05, 1.95, 1.05, 1.95, -1),
-  LATERAL_CUBE_STICKER(0, 1.05, 1.95, 0.05, 0.95, -1), 
+  LATERAL_CUBE_STICKER(0, 1.05, 1.95, 2.05, 2.95, -1), 
    
   // LEFT BOTTOM
-  LATERAL_CUBE_STICKER(0, 0.05, 0.95, 2.05, 2.95, -1),
+  LATERAL_CUBE_STICKER(0, 0.05, 0.95, 0.05, 0.95, -1),
   LATERAL_CUBE_STICKER(0, 0.05, 0.95, 1.05, 1.95, -1),
-  LATERAL_CUBE_STICKER(0, 0.05, 0.95, 0.05, 0.95, -1), 
+  LATERAL_CUBE_STICKER(0, 0.05, 0.95, 2.05, 2.95, -1), 
  
   // TOP BACK
   VERTICAL_CUBE_STICKER(0.05, 0.95, 3, 0.05, 0.95, 1),
@@ -132,12 +133,13 @@ GLfloat gCubeVertices[] = {
 };
 
 GLfloat color_pallet[] = {
-  0.8, 0.0, 0.0,  // R
-  1.0, 1.0, 1.0,  // W
-  1.0, 0.69, 0.0, // O
-  1.0, 1.0, 0.0,  // Y
-  0.0, 0.37, 0.0, // G
-  0.0, 0.0, 1.0,  // B
+  0.8, 0.0, 0.0,    // R
+  1.0, 1.0, 1.0,    // W
+  .75, 0.4, 0.02, // O - ambient is specifically subtracted to help 
+                    // differentiate from yellow
+  1.0, 1.0, 0.0,    // Y
+  0.0, 0.37, 0.0,   // G
+  0.0, 0.0, 1.0,    // B
 };
 
 // Color elements per vertex per square per face per cube
@@ -152,6 +154,15 @@ enum
   NUM_ATTRIBUTES
 };
 
+// TODO: Is the camera no longer here? This probably needs to be rethought
+// and refactored for proper object composition
+GLKMatrix4 gCameraMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
+GLKMatrix4 gPositionCubeMatrix = GLKMatrix4MakeTranslation(-1.5, -1.5, -1.5);
+GLKMatrix4 gShrinkCubeMatrix = GLKMatrix4MakeScale(0.66, 0.66, 0.66);
+GLKMatrix4 gNormalizeCubeMatrix =
+    GLKMatrix4Multiply(gShrinkCubeMatrix, gPositionCubeMatrix);
+GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
+
 @implementation CubeView
 
 - (id)init
@@ -159,6 +170,7 @@ enum
   self = [super init];
   if (self) {
     _cube = new Cube();
+    _animationQueue = [AnimationQueue new];
   }
   return self;
 }
@@ -204,8 +216,15 @@ enum
   glVertexAttribPointer(GLKVertexAttribColor,
                         3, GL_FLOAT, GL_FALSE, 0, 0);
   
+  glUniform3fv(
+      [self uniformWithName:(GLchar*)"ambientLight"], 1, gAmbientLight.v);
+  
+  // Load the uniforms the first time so we can lazily avoid loading them in the future
+  _staticMatricesDirty = YES;
+
   // Unset the active VAO so other code cannot mess this up
   glBindVertexArrayOES(0);
+  [self queueRandomMutation];
 }
 
 - (void)tearDownGL
@@ -219,40 +238,47 @@ enum
 {
   [super update];
   
-  // TODO: Is the camera no longer here? This probably needs to be rethought
-  // and refactored for proper object composition
-    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
+  // TODO: Send signals from the app controler that the view has changed.
+  if (_staticMatricesDirty) {
+    [self updateStaticMatricesForProjection:
+         self.scene.effect.transform.projectionMatrix];
+  }
   
-  GLKMatrix4 rot_cube =
-      GLKMatrix4MakeRotation(_rotation, 1.0f, 1.0f, 1.0f);
-  GLKMatrix4 position_cube = GLKMatrix4MakeTranslation(-1.5, -1.5, -1.5);
-  GLKMatrix4 shrink_cube = GLKMatrix4MakeScale(0.5, 0.5, 0.5);
-  
-  GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(shrink_cube, position_cube);
-  //modelViewMatrix = GLKMatrix4Multiply(rot_cube, modelViewMatrix);
-  
-  modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
-  
-  // TOM CONFUSION: what exactly is this? The shader has a fixed clieht position.
-  // This seems to be related to the camera so that model view normals are 
-  // transformed to global normals
-  _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
-  
-  _modelViewProjectionMatrix = GLKMatrix4Multiply(
-      self.scene.effect.transform.projectionMatrix,
-      modelViewMatrix);
-  
-  _rotation += self.scene.timeSinceLastUpdate * 0.5f;
-  
-  _ambientLight = GLKVector3Make(0.1, 0.1, 0.1);
-  if (_colors_dirty) {
+  _isAnimating = [_animationQueue fastFoward:self.scene.timeSinceLastUpdate
+                                 forSnapshot:&_animationSnapshot];
+  if (_isAnimating) {
+    GLKMatrix4 animationMatrix =
+        GLKMatrix4MakeWithQuaternion(_animationSnapshot.state);
+    animationMatrix = GLKMatrix4Multiply(animationMatrix, gNormalizeCubeMatrix);
+    animationMatrix = GLKMatrix4Multiply(gCameraMatrix, animationMatrix);
+    _animationNormalMatrix = 
+    GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(animationMatrix), NULL);
+    _animationModelViewProjectionMatrix = GLKMatrix4Multiply(
+        self.scene.effect.transform.projectionMatrix,
+        animationMatrix);
+  }
+      
+  // This must come after retrieving animation parameters, becuase the animation
+  // queue may trigger a callback which mutates the model.
+  if (_colorsDirty) {
       [self updateColorBuffer];
   }
 }
 
+- (void)updateStaticMatricesForProjection:(GLKMatrix4)projectionMatrix
+{
+  GLKMatrix4 modelViewMatrix =
+      GLKMatrix4Multiply(gCameraMatrix, gNormalizeCubeMatrix);
+  _staticNormalMatrix = GLKMatrix3InvertAndTranspose(
+      GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+  _staticModelViewProjectionMatrix =
+      GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+  _staticMatricesDirty = NO;
+}
+
 - (void)updateColorBuffer
 {
-  _colors_dirty = NO;
+  _colorsDirty = NO;
   // Bit blast the color buffer
   for (int sticker = 0; sticker < 9 * 6; ++sticker) {
     Color color_code = _cube->raw_buffer()[sticker];
@@ -277,27 +303,223 @@ enum
   
   glUseProgram(self.program);
   
-  // Assign our calculated uniforms to the pipeline
-  glUniformMatrix4fv(
-      [self uniformWithName:(GLchar*)"modelViewProjectionMatrix"],
-      1, 0, _modelViewProjectionMatrix.m);
-  glUniformMatrix3fv(
-      [self uniformWithName:(GLchar*)"normalMatrix"],
-      1, 0, _normalMatrix.m);
-  glUniform3fv(
-       [self uniformWithName:(GLchar*)"ambientLight"], 1, _ambientLight.v);
-  
   [self draw];
 }
 
-- (void) draw
+- (void)loadUniformsWithAnimation:(bool)animation
 {
-  // my kingdom for GL_QUADS...
-  glDrawArrays(GL_TRIANGLES, 0, 
-               sizeof(gCubeVertices) / (6 * sizeof(gCubeVertices[0])));
-
+  if (!animation && _loadedStaticUniforms) {
+    return;
+  }
+  
+  _loadedStaticUniforms = !animation;
+  if (animation) {
+    glUniformMatrix4fv(
+        [self uniformWithName:(GLchar*)"modelViewProjectionMatrix"],
+        1, 0, _animationModelViewProjectionMatrix.m);
+    glUniformMatrix3fv(
+        [self uniformWithName:(GLchar*)"normalMatrix"],
+        1, 0, _animationNormalMatrix.m);
+  } else {    
+    glUniformMatrix4fv(
+         [self uniformWithName:(GLchar*)"modelViewProjectionMatrix"],
+         1, 0, _staticModelViewProjectionMatrix.m);
+    glUniformMatrix3fv(
+         [self uniformWithName:(GLchar*)"normalMatrix"],
+         1, 0, _staticNormalMatrix.m);
+  }
 }
 
+#define DRAW_STICKER_RANGE(face, start, count) \
+  glDrawArrays(GL_TRIANGLES, 6 * (face * 9 + start), 6 * count);
+#define DRAW_STICKER_ROW(face, row) DRAW_STICKER_RANGE(face, (row) * 3, 3)
+#define DRAW_STICKER_COL(face, col) \
+  DRAW_STICKER_RANGE(face, col, 1); \
+  DRAW_STICKER_RANGE(face, (col) + 3, 1); \
+  DRAW_STICKER_RANGE(face, (col) + 6, 1)
+#define DRAW_WHOLE_FACE(face) DRAW_STICKER_RANGE(face, 0, 9);
+#define DRAW_WHOLE_CUBE() glDrawArrays(GL_TRIANGLES, 0, 6 * 9 * 6)
 
+- (void)draw
+{
+  Cubelet affectedArea = _animationSnapshot.affectedArea;
+  if (!_isAnimating) {
+    [self loadUniformsWithAnimation:NO];
+    DRAW_WHOLE_CUBE();
+    return;
+  } else if (affectedArea == WHOLE_CUBE) {
+    [self loadUniformsWithAnimation:YES];
+    DRAW_WHOLE_CUBE();
+    return;
+  }
+
+  if (affectedArea >= LEFT && affectedArea <= RIGHT) {
+    int col = affectedArea - LEFT;
+    [self loadUniformsWithAnimation:YES];
+    DRAW_STICKER_COL(FRONT_FACE, col);
+    DRAW_STICKER_COL(TOP_FACE, col);
+    DRAW_STICKER_COL(BACK_FACE, 2 - col);
+    DRAW_STICKER_COL(BOTTOM_FACE, col);
+    if (affectedArea == LEFT) {
+      DRAW_WHOLE_FACE(LEFT_FACE);
+    } else if (affectedArea == RIGHT) {
+      DRAW_WHOLE_FACE(RIGHT_FACE);
+    }
+    
+    [self loadUniformsWithAnimation:NO];
+    DRAW_STICKER_COL(FRONT_FACE, (col + 1) %3 );
+    DRAW_STICKER_COL(TOP_FACE, (col + 1) % 3);
+    DRAW_STICKER_COL(BACK_FACE, (3 - col) % 3);
+    DRAW_STICKER_COL(BOTTOM_FACE, (col + 1) % 3);
+    DRAW_STICKER_COL(FRONT_FACE, (col + 2) % 3);
+    DRAW_STICKER_COL(TOP_FACE, (col + 2) % 3);
+    DRAW_STICKER_COL(BACK_FACE, (4 - col) % 3);
+    DRAW_STICKER_COL(BOTTOM_FACE, (col + 2)%3);
+    if (affectedArea != LEFT) {
+      DRAW_WHOLE_FACE(LEFT_FACE);
+    }
+    if (affectedArea != RIGHT) {
+      DRAW_WHOLE_FACE(RIGHT_FACE);
+    }
+  } else if (affectedArea >= UP && affectedArea <= DOWN) {
+    int row = affectedArea - UP;
+    [self loadUniformsWithAnimation:YES];
+    DRAW_STICKER_ROW(FRONT_FACE, row);
+    DRAW_STICKER_ROW(RIGHT_FACE, row);
+    DRAW_STICKER_ROW(BACK_FACE, row);
+    DRAW_STICKER_ROW(LEFT_FACE, row);
+    if (affectedArea == UP) {
+      DRAW_WHOLE_FACE(TOP_FACE);
+    } else if (affectedArea == DOWN) {
+      DRAW_WHOLE_FACE(BOTTOM_FACE);
+    }
+    
+    [self loadUniformsWithAnimation:NO];
+    DRAW_STICKER_ROW(FRONT_FACE, (row + 1) % 3);
+    DRAW_STICKER_ROW(RIGHT_FACE, (row + 1) % 3);
+    DRAW_STICKER_ROW(BACK_FACE, (row + 1) % 3);
+    DRAW_STICKER_ROW(LEFT_FACE, (row + 1) % 3);
+    DRAW_STICKER_ROW(FRONT_FACE, (row + 2) % 3);
+    DRAW_STICKER_ROW(RIGHT_FACE, (row + 2) %3);
+    DRAW_STICKER_ROW(BACK_FACE, (row + 2) % 3);
+    DRAW_STICKER_ROW(LEFT_FACE, (row + 2) % 3);
+    if (affectedArea != UP) {
+      DRAW_WHOLE_FACE(TOP_FACE);
+    }
+    if (affectedArea != DOWN) {
+      DRAW_WHOLE_FACE(BOTTOM_FACE);
+    }
+  } else {
+    int col = affectedArea - FRONT;
+    [self loadUniformsWithAnimation:YES];
+    DRAW_STICKER_ROW(TOP_FACE, (2 - col));
+    DRAW_STICKER_COL(LEFT_FACE, (2 - col));
+    DRAW_STICKER_ROW(BOTTOM_FACE, col);
+    DRAW_STICKER_COL(RIGHT_FACE, col);
+    if (affectedArea == FRONT) {
+      DRAW_WHOLE_FACE(FRONT_FACE);
+    } else if (affectedArea == BACK) {
+      DRAW_WHOLE_FACE(BACK_FACE);
+    }
+    
+    [self loadUniformsWithAnimation:NO];
+    DRAW_STICKER_ROW(TOP_FACE, (4 - col) % 3);
+    DRAW_STICKER_COL(LEFT_FACE, (4 - col) % 3);
+    DRAW_STICKER_ROW(BOTTOM_FACE, (col + 1) % 3);
+    DRAW_STICKER_COL(RIGHT_FACE, (col + 1) % 3);
+    DRAW_STICKER_ROW(TOP_FACE, (3 - col) % 3);
+    DRAW_STICKER_COL(LEFT_FACE, (3 - col) % 3);
+    DRAW_STICKER_ROW(BOTTOM_FACE, (col + 2) % 3);
+    DRAW_STICKER_COL(RIGHT_FACE, (col + 2) % 3);
+    if (affectedArea != FRONT) {
+      DRAW_WHOLE_FACE(FRONT_FACE);
+    }
+    if (affectedArea != BACK) {
+      DRAW_WHOLE_FACE(BACK_FACE);
+    }
+  }
+}
+
+- (void)queueRandomMutation
+{
+  int seed = rand();
+  Twist direction = seed % 2 ? NORMAL : PRIME;
+  seed = seed >> 1;
+
+  if (seed % 13 < 4) {
+    [self startRotation:Rotation(seed % 13)];
+  } else {
+    Cubelet cubelet = Cubelet(seed % 13 - 4);
+    [self startTwist:cubelet direction:direction];
+  }
+}
+
+- (void)startTwist:(Cubelet)cubelet direction:(Twist)direction
+{
+  Animation *animation = [Animation new];
+  float rad = M_PI_2 * (direction == NORMAL ? 1 : -1);
+  if (cubelet >= UP && cubelet <= DOWN) {
+    animation.start = GLKQuaternionMakeWithAngleAndAxis(0, 0, 1, 0);
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 0,- 1, 0);
+  } else if (cubelet >= LEFT && cubelet <= RIGHT) {
+    animation.start = GLKQuaternionMakeWithAngleAndAxis(0, -1, 0, 0);
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 1, 0, 0);
+  } else {
+    animation.start = GLKQuaternionMakeWithAngleAndAxis(0, 0, 0, 1);
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 0, 0, -1);
+  }
+  animation.affectedArea = cubelet;
+  animation.duration = 0.5;
+  animation.doneCallback = 
+    [NSInvocation invocationWithTarget:self
+        selector:@selector(twistModel:direction:)
+        retainArguments:NO, cubelet, direction];
+  [_animationQueue enqueueAnimation:animation];
+}
+
+-(void) twistModel:(Cubelet)cubelet direction:(Twist)direction
+{
+  _cube->Twist(cubelet, direction);
+  _colorsDirty = YES;
+  [self update];
+  [self queueRandomMutation];
+}
+
+- (void)startRotation:(Rotation) direction
+{
+  Animation *animation = [Animation new];
+  switch (direction) {
+    case ROT_UP:
+      animation.start = GLKQuaternionMakeWithAngleAndAxis(0, 1, 0, 0);
+      animation.stop = GLKQuaternionMakeWithAngleAndAxis(M_PI / 2, -1, 0, 0);
+      break;
+    case ROT_DOWN:
+      animation.start = GLKQuaternionMakeWithAngleAndAxis(0, 1, 0, 0);
+      animation.stop = GLKQuaternionMakeWithAngleAndAxis(-M_PI / 2, -1, 0, 0);
+      break;
+    case ROT_LEFT:
+      animation.start = GLKQuaternionMakeWithAngleAndAxis(0, 0, 1, 0);
+      animation.stop = GLKQuaternionMakeWithAngleAndAxis(M_PI / 2, 0, -1, 0);
+      break;
+    case ROT_RIGHT:
+      animation.start = GLKQuaternionMakeWithAngleAndAxis(0, 0, 1, 0);
+      animation.stop = GLKQuaternionMakeWithAngleAndAxis(-M_PI / 2, 0, -1, 0);
+      break;
+  };
+  animation.affectedArea = WHOLE_CUBE;
+  animation.duration = 0.5;
+  animation.doneCallback = 
+      [NSInvocation invocationWithTarget:self
+                                selector:@selector(rotateModel:)
+                         retainArguments:NO, direction];
+  [_animationQueue enqueueAnimation:animation];
+}
+
+- (void)rotateModel:(Rotation) direction
+{
+  _cube->Rotate(direction);
+  _colorsDirty = YES;
+  [self queueRandomMutation];
+}
 
 @end

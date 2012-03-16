@@ -11,9 +11,8 @@
 
 #import "CubeModel.h"
 #import "ModelView.hh"
+#import "AnimationQueue.h"
 
-// TODO: Consider keeping one set of matrices and modifying the 
-// vertices themselves. It may be simpler or faster
 @interface CubeView : ModelView {
   // Model
   Cube* _cube;
@@ -22,14 +21,22 @@
   GLuint _vertexArray;
   GLuint _vertexBuffers[2];
   
-  // Shader uniforms
-  GLKMatrix4 _modelViewProjectionMatrix;
-  GLKMatrix3 _normalMatrix;
-  GLKVector3 _ambientLight;
+  // Shader uniforms. Two sets are stored to stay true to iOS's render-on-demand 
+  // model
+  GLKMatrix4 _staticModelViewProjectionMatrix;
+  GLKMatrix3 _staticNormalMatrix;
+  GLKMatrix4 _animationModelViewProjectionMatrix;
+  GLKMatrix3 _animationNormalMatrix;
+
+  AnimationQueue* _animationQueue;
+  AnimationSnapshot _animationSnapshot;
+  bool _isAnimating;
   
-  // Animation parameters
-  float _rotation;
-  bool _colors_dirty;
+  // Lazy eval guides
+  bool _loadedStaticUniforms;
+  bool _staticMatricesDirty;
+  bool _colorsDirty;
 }
 -(void) updateColorBuffer;
+-(void) twistModel:(Cubelet)cubelet direction:(Twist)direction;
 @end

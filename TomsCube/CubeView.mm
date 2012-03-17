@@ -189,8 +189,20 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
 
 - (void)handleRotation:(UIGestureRecognizer*)gestureRecognizer
 {
-  NSLog(@"Did rotate");
+  static float rad_change = 0;
+  UIRotationGestureRecognizer* rotation =
+      (UIRotationGestureRecognizer*)gestureRecognizer;
+  rad_change += rotation.rotation;
+  if ([rotation state] == UIGestureRecognizerStateEnded) {
+    if (rad_change > M_PI_4) {
+      [self startTwist:FRONT direction:NORMAL];
+    } else if (rad_change < -M_PI_4) {
+      [self startTwist:FRONT direction:PRIME];
+    }
+    rad_change = 0;
+  }
 }
+
 - (void)handleTap:(UIGestureRecognizer*)gestureRecognizer
 {
   NSLog(@"Did tap");
@@ -198,16 +210,57 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
 
 - (void)handleSwipe:(UIGestureRecognizer *)gestureRecognizer;
 {
-
   UISwipeGestureRecognizer* swipe =
       (UISwipeGestureRecognizer*)gestureRecognizer;
   UISwipeGestureRecognizerDirection swipe_direction = [swipe direction];
-    NSLog(@"Swipe direction:%d touches:%d", swipe_direction, swipe.numberOfTouches);
-  [self startRotation:
-     swipe_direction == UISwipeGestureRecognizerDirectionRight ? ROT_RIGHT :
-     swipe_direction == UISwipeGestureRecognizerDirectionLeft ? ROT_LEFT :
-     swipe_direction == UISwipeGestureRecognizerDirectionUp ? ROT_UP :
-     ROT_DOWN];
+  UIView* view = self.scene.view;
+  CGPoint centroid = [swipe locationInView:view];
+  CGRect frame = view.frame;
+  int clipX = frame.size.width / 8;
+  int clipY = frame.size.height / 4;
+  CGRect clipped = CGRectInset(frame, clipX, clipY);
+
+  NSLog(@"Point:%@ Frame:%@", 
+        NSStringFromCGPoint(centroid),
+        NSStringFromCGRect(clipped));
+  if (CGRectContainsPoint(clipped, centroid)) {
+    NSLog(@"In square");
+    float col_ratio = (centroid.x - frame.origin.x) / frame.size.width * 3.0;
+    float row_ratio = (centroid.y - frame.origin.y) / frame.size.height * 3.0;
+    Cubelet col = MIDDLE;
+    Cubelet row = EQUATOR;
+    if (col_ratio < 1.1) {
+      col = LEFT;
+    } else if (col_ratio > 1.9) {
+      col = RIGHT;
+    }
+    if (row_ratio < 1.2) {
+      row = UP;
+    } else if (row_ratio > 1.8) {
+      row = DOWN;
+    }
+    NSLog(@"Ratio is col:%f row:%f", col_ratio, row_ratio);
+    switch (swipe_direction) {
+      case UISwipeGestureRecognizerDirectionUp:
+        [self startTwist:col direction:PRIME];
+        break;
+      case UISwipeGestureRecognizerDirectionDown:
+        [self startTwist:col direction:NORMAL];
+        break;
+      case UISwipeGestureRecognizerDirectionLeft:
+        [self startTwist:row direction:NORMAL];
+        break;
+      case UISwipeGestureRecognizerDirectionRight:
+        [self startTwist:row direction:PRIME];
+        break;
+    };
+  } else {
+    [self startRotation:
+       swipe_direction == UISwipeGestureRecognizerDirectionRight ? ROT_RIGHT :
+       swipe_direction == UISwipeGestureRecognizerDirectionLeft ? ROT_LEFT :
+       swipe_direction == UISwipeGestureRecognizerDirectionUp ? ROT_UP :
+       ROT_DOWN];
+  }
 }
 
 - (void)setupGL

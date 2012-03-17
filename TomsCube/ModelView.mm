@@ -30,6 +30,14 @@
   return self;
 }
 
+-(void)viewDidLoad
+{
+}
+
+-(void)viewDidUnload
+{
+}
+
 - (void)setupGL
 {
 }

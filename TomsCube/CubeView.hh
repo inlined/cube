@@ -33,10 +33,16 @@
   bool _isAnimating;
   
   // Lazy eval guides
-  bool _loadedStaticUniforms;
   bool _staticMatricesDirty;
   bool _colorsDirty;
 }
+
+- (void)viewDidLoad;
+- (void)viewDidUnload;
+- (void)handleRotation:(UIGestureRecognizer*)gestureRecognizer;
+- (void)handleSwipe:(UIGestureRecognizer *)gestureRecognizer;
+- (void)handleTap:(UIGestureRecognizer*)recognizer;
+
 -(void) updateColorBuffer;
 -(void) twistModel:(Cubelet)cubelet direction:(Twist)direction;
 @end

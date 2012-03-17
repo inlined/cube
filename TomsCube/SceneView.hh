@@ -10,11 +10,14 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-@interface SceneView : GLKViewController {
+@interface SceneView : GLKViewController<UIGestureRecognizerDelegate> {
   bool _aspectRatioDirty;
 }
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
+
+-(void)setupGL;
+-(void)tearDownGL;
 
 // TODO: Add more detail about positioning, scale, and orientation. Consider
 // moving back to pure ObjC when the controller can inject a CubeView directly

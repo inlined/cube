@@ -24,6 +24,13 @@
 @synthesize context = _context;
 @synthesize effect = _effect;
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+       shouldReceiveTouch:(UITouch *)touch 
+{
+  // TODO: Filter out black touches
+  return YES;
+}
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -36,14 +43,37 @@
   GLKView *view = (GLKView *)self.view;
   view.context = self.context;
   view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-  
   [self setupGL];
+  
+  UIGestureRecognizer* recognizer;
+  recognizer = [[UIRotationGestureRecognizer alloc]
+                initWithTarget:_model_view action:@selector(handleRotation:)];
+  [recognizer setDelegate:self];
+  [view addGestureRecognizer:recognizer];
+  [self addSwipeRecognizer:UISwipeGestureRecognizerDirectionLeft];
+  [self addSwipeRecognizer:UISwipeGestureRecognizerDirectionRight];
+  [self addSwipeRecognizer:UISwipeGestureRecognizerDirectionUp];
+  [self addSwipeRecognizer:UISwipeGestureRecognizerDirectionDown];
+  recognizer = [[UITapGestureRecognizer alloc]
+                initWithTarget:_model_view action:@selector(handleTap:)];
+  [recognizer setDelegate:self];
+  [view addGestureRecognizer:recognizer];
+}
+
+- (void)addSwipeRecognizer:(UISwipeGestureRecognizerDirection)direction
+{
+  UISwipeGestureRecognizer* recognizer = [UISwipeGestureRecognizer new];
+  [recognizer addTarget:_model_view action:@selector(handleSwipe:)];
+  [recognizer setDelegate:self];
+  recognizer.direction = direction;
+  [self.view addGestureRecognizer:recognizer];
 }
 
 - (void)viewDidUnload
 {    
   [super viewDidUnload];
   
+  [_model_view viewDidUnload];
   [self tearDownGL];
   
   if ([EAGLContext currentContext] == self.context) {
@@ -83,8 +113,8 @@
   glEnable(GL_DEPTH_TEST);
   _aspectRatioDirty = YES;
 }
-
-- (void)tearDownGL
+  
+-(void)tearDownGL
 {
   [EAGLContext setCurrentContext:self.context];
   [_model_view tearDownGL];
@@ -109,8 +139,8 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-  glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
-  //glClearColor(0, 0, 0, 1.0f);
+  //glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
+  glClearColor(0, 0, 0, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   //[self.effect prepareToDraw];
   [_model_view glkView:view drawInRect:rect];
@@ -118,4 +148,5 @@
 
 -(void)addModel:(id)modelView
 {}
+
 @end

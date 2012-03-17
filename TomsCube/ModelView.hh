@@ -20,6 +20,9 @@
 // Creates a GL program. Must be called after setting the ESGL context
 - (id) init;
 
+- (void)viewDidLoad;
+- (void)viewDidUnload;
+
 // Creates any OpenGL buffers, shaders, etc.
 - (void)setupGL;
 

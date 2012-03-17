@@ -180,6 +180,36 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
   delete _cube;
 }
 
+- (void)viewDidLoad
+{}
+- (void)viewDidUnload
+{
+  //TODO implement
+}
+
+- (void)handleRotation:(UIGestureRecognizer*)gestureRecognizer
+{
+  NSLog(@"Did rotate");
+}
+- (void)handleTap:(UIGestureRecognizer*)gestureRecognizer
+{
+  NSLog(@"Did tap");
+}
+
+- (void)handleSwipe:(UIGestureRecognizer *)gestureRecognizer;
+{
+
+  UISwipeGestureRecognizer* swipe =
+      (UISwipeGestureRecognizer*)gestureRecognizer;
+  UISwipeGestureRecognizerDirection swipe_direction = [swipe direction];
+    NSLog(@"Swipe direction:%d touches:%d", swipe_direction, swipe.numberOfTouches);
+  [self startRotation:
+     swipe_direction == UISwipeGestureRecognizerDirectionRight ? ROT_RIGHT :
+     swipe_direction == UISwipeGestureRecognizerDirectionLeft ? ROT_LEFT :
+     swipe_direction == UISwipeGestureRecognizerDirectionUp ? ROT_UP :
+     ROT_DOWN];
+}
+
 - (void)setupGL
 {
   [super setupGL];
@@ -208,23 +238,25 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
   glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
   
   // In the other buffer, bind a dynamic vector of colors per vertex
-  glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffers[1]);
   [self updateColorBuffer];
   
-  // 16 is just a non-reserved value
+  glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffers[1]);
+  
   glEnableVertexAttribArray(GLKVertexAttribColor);
   glVertexAttribPointer(GLKVertexAttribColor,
                         3, GL_FLOAT, GL_FALSE, 0, 0);
   
   glUniform3fv(
       [self uniformWithName:(GLchar*)"ambientLight"], 1, gAmbientLight.v);
-  
-  // Load the uniforms the first time so we can lazily avoid loading them in the future
-  _staticMatricesDirty = YES;
 
   // Unset the active VAO so other code cannot mess this up
   glBindVertexArrayOES(0);
-  [self queueRandomMutation];
+  
+  
+  // Load the uniforms the first time so we can lazily avoid loading them in the future
+  _staticMatricesDirty = YES;
+  _colorsDirty = YES;
+  _isAnimating = NO;
 }
 
 - (void)tearDownGL
@@ -251,8 +283,9 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
         GLKMatrix4MakeWithQuaternion(_animationSnapshot.state);
     animationMatrix = GLKMatrix4Multiply(animationMatrix, gNormalizeCubeMatrix);
     animationMatrix = GLKMatrix4Multiply(gCameraMatrix, animationMatrix);
-    _animationNormalMatrix = 
-    GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(animationMatrix), NULL);
+    _animationNormalMatrix = GLKMatrix3InvertAndTranspose(
+        GLKMatrix4GetMatrix3(animationMatrix),
+        NULL);
     _animationModelViewProjectionMatrix = GLKMatrix4Multiply(
         self.scene.effect.transform.projectionMatrix,
         animationMatrix);
@@ -308,11 +341,6 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
 
 - (void)loadUniformsWithAnimation:(bool)animation
 {
-  if (!animation && _loadedStaticUniforms) {
-    return;
-  }
-  
-  _loadedStaticUniforms = !animation;
   if (animation) {
     glUniformMatrix4fv(
         [self uniformWithName:(GLchar*)"modelViewProjectionMatrix"],
@@ -482,7 +510,6 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
   _cube->Twist(cubelet, direction);
   _colorsDirty = YES;
   [self update];
-  [self queueRandomMutation];
 }
 
 - (void)startRotation:(Rotation) direction
@@ -519,7 +546,6 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
 {
   _cube->Rotate(direction);
   _colorsDirty = YES;
-  [self queueRandomMutation];
 }
 
 @end

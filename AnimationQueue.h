@@ -28,6 +28,7 @@ typedef struct AnimationSnapshot {
 @interface AnimationQueue : NSObject {
   NSMutableArray* queue;
   NSTimeInterval timeIntoAnimation;
+  dispatch_queue_t mutex;
 }
 - (void)enqueueAnimation:(Animation*)animation;
 - (bool)fastFoward:(NSTimeInterval)duration

@@ -562,7 +562,6 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
 {
   _cube->Twist(cubelet, direction);
   _colorsDirty = YES;
-  [self update];
 }
 
 - (void)startRotation:(Rotation) direction

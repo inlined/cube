@@ -44,29 +44,60 @@ float smooth(float t) {
   self = [super init];
   if (self) {
     queue = [NSMutableArray new];
+    mutex = dispatch_queue_create("com.espressobytes.animation_queue", NULL);
   }
   return self;
 }
 
+- (void)dealloc
+{
+  dispatch_release(mutex);
+}
+
 - (void)enqueueAnimation:(Animation*)animation
 {
-  [queue addObject:animation];
+  dispatch_sync(mutex, ^{
+    [queue addObject:animation];
+  });
 }
 
 - (bool)fastFoward:(NSTimeInterval)duration
        forSnapshot:(AnimationSnapshot*)snapshot
 {
-  if (![queue count]) {
+  __block bool queueEmpty;
+  __block Animation* front;
+  
+  // Try peek
+  dispatch_sync(mutex, ^{
+    if ([queue count]) {
+      queueEmpty = NO;
+      front = [queue objectAtIndex:0];
+    } else {
+      queueEmpty = YES;
+    }
+  });
+  
+  if (queueEmpty) {
     return NO;
-}
+  }
   
   timeIntoAnimation += duration;
-  Animation* front = [queue objectAtIndex:0];
   while (timeIntoAnimation > front.duration) {
-    [queue removeObjectAtIndex:0];
     [front.doneCallback invoke];
     timeIntoAnimation -= front.duration;
-    if (![queue count]) {
+    
+    // pop, try peek
+    dispatch_sync(mutex, ^{
+      [queue removeObjectAtIndex:0];
+      if ([queue count]) {
+        queueEmpty = NO;
+        front = [queue objectAtIndex:0];
+      } else {
+        queueEmpty = YES;
+      }
+    });
+    
+    if (queueEmpty) {
       timeIntoAnimation = 0;
       return NO;
     }

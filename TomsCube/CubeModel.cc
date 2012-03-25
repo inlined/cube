@@ -100,11 +100,6 @@ void Cube::Reset() {
       face[square] = (Color)face_id;
     }
   }
-  
-  GetFace(TOP_FACE)[7] = WHITE;
-  GetFace(RIGHT_FACE)[3] = BLUE;
-  GetFace(BOTTOM_FACE)[1] = YELLOW;
-  GetFace(LEFT_FACE)[5] = GREEN;
 }
 
 void Cube::Rotate(Rotation direction) {

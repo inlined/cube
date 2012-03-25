@@ -189,7 +189,7 @@ void Cube::Twist(Cubelet cubelet, ::Twist direction) {
     if (cubelet == LEFT) {
       RotateDirection[direction](left);
     } else if (cubelet == RIGHT) {
-      RotateDirection[direction](right);
+      RotateDirection[!direction](right);
     }
   }
   
@@ -210,7 +210,7 @@ void Cube::Twist(Cubelet cubelet, ::Twist direction) {
     if (cubelet == UP) {
       RotateDirection[direction](top);
     } else if (cubelet == DOWN) {
-      RotateDirection[direction](bottom);
+      RotateDirection[!direction](bottom);
     }
   }
   
@@ -239,7 +239,7 @@ void Cube::Twist(Cubelet cubelet, ::Twist direction) {
     if (cubelet == FRONT) {
       RotateDirection[direction](front);
     } else if (cubelet == BACK) {
-      RotateDirection[direction](back);
+      RotateDirection[!direction](back);
     }
   }
 }

@@ -232,6 +232,54 @@ NSString* nameForFace(WhichFace face) {
   CHECK_FACE(FRONT_FACE, 0, YELLOW);
 }
 
+- (void)testTwistFont
+{
+  up[6] = YELLOW;
+  up[7] = ORANGE;
+  c->Twist(FRONT, NORMAL);
+  CHECK_FACE(RIGHT_FACE, 0, YELLOW);
+  CHECK_FACE(RIGHT_FACE, 3, ORANGE);
+  CHECK_FACE(RIGHT_FACE, 6, GREEN);
+  CHECK_FACE(RIGHT_FACE, 2, WHITE);
+  CHECK_FACE(RIGHT_FACE, 5, WHITE);
+  CHECK_FACE(RIGHT_FACE, 8, WHITE);
+}
+
+- (void)testFaceRotationsAreCorrectForTwists
+{
+  down[3] = WHITE;
+  c->Twist(DOWN, PRIME);
+  CHECK_FACE(FRONT_FACE, 6, YELLOW);
+  CHECK_FACE(BOTTOM_FACE, 2, WHITE);
+  
+  up[3] = WHITE;
+  c->Twist(UP, PRIME);
+  CHECK_FACE(FRONT_FACE, 0, YELLOW);
+  CHECK_FACE(TOP_FACE, 7, WHITE);
+  
+  c->Reset();
+  left[5] = BLUE;
+  c->Twist(LEFT, NORMAL);
+  CHECK_FACE(FRONT_FACE, 0, GREEN);
+  CHECK_FACE(LEFT_FACE, 7, BLUE);
+  
+  right[3] = BLUE;
+  c->Twist(RIGHT, NORMAL);
+  CHECK_FACE(FRONT_FACE, 2, GREEN);
+  CHECK_FACE(RIGHT_FACE, 7, BLUE);
+  
+  c->Reset();
+  front[2] = WHITE;
+  c->Twist(FRONT, NORMAL);
+  CHECK_FACE(TOP_FACE, 7, YELLOW);
+  CHECK_FACE(FRONT_FACE, 5, WHITE);
+  
+  back[2] = WHITE;
+  c->Twist(BACK, NORMAL);
+  CHECK_FACE(TOP_FACE, 2, YELLOW);
+  CHECK_FACE(BACK_FACE, 3, WHITE);
+}
+
 - (void)testTwistUp
 {
   CHECK_FACE(FRONT_FACE, 0, RED);

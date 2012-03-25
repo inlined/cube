@@ -299,8 +299,10 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
   glVertexAttribPointer(GLKVertexAttribColor,
                         3, GL_FLOAT, GL_FALSE, 0, 0);
   
+  glUseProgram(self.program);
   glUniform3fv(
       [self uniformWithName:(GLchar*)"ambientLight"], 1, gAmbientLight.v);
+  glUseProgram(0);
 
   // Unset the active VAO so other code cannot mess this up
   glBindVertexArrayOES(0);

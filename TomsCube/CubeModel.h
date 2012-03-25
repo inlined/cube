@@ -19,6 +19,8 @@ public:
   typedef Color* Face;
   
   Cube();
+  void Reset();
+  
   void Twist(Cubelet cubelet, Twist direction);
   void Rotate(Rotation direction);
   

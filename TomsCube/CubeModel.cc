@@ -88,6 +88,10 @@ inline void Cube::RotateFace180(Cube::Face face) {
 }
 
 Cube::Cube() {
+  Reset();
+}
+
+void Cube::Reset() {
   for (WhichFace face_id = FRONT_FACE; face_id < NUM_FACES; ++face_id)
   {
     Face face = GetFace(face_id);
@@ -96,6 +100,11 @@ Cube::Cube() {
       face[square] = (Color)face_id;
     }
   }
+  
+  GetFace(TOP_FACE)[7] = WHITE;
+  GetFace(RIGHT_FACE)[3] = BLUE;
+  GetFace(BOTTOM_FACE)[1] = YELLOW;
+  GetFace(LEFT_FACE)[5] = GREEN;
 }
 
 void Cube::Rotate(Rotation direction) {
@@ -218,7 +227,6 @@ void Cube::Twist(Cubelet cubelet, ::Twist direction) {
     int row = cubelet - FRONT;
     Transpose(left);
     Transpose(right);  // and flip
-    RotateFace180(bottom); // and flip
     CopyRow(temp, row, top, 2 - row);
     if (direction == NORMAL) {
       CopyRow(top, 2 - row, left, 2 - row);
@@ -231,7 +239,6 @@ void Cube::Twist(Cubelet cubelet, ::Twist direction) {
       CopyRow(bottom, row, left, 2 - row);
       CopyRow(left, 2 - row, temp, row);
     }
-    RotateFace180(bottom);
     Transpose(right);
     Transpose(left);
     if (cubelet == FRONT) {

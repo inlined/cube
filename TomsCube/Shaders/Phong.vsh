@@ -15,15 +15,17 @@ varying lowp vec3 colorVarying;
 uniform mat4 modelViewProjectionMatrix;
 uniform mat3 normalMatrix;
 uniform vec3 ambientLight;
+//uniform vec3 lightPosition;
 
 void main()
 {
-    vec3 eyeNormal = normalize(normalMatrix * normal);
-    vec3 lightPosition = vec3(0.0, 0.0, 1.0);
+  vec3 eyeNormal = normalize(normalMatrix * normal);
+  vec3 lightPosition = vec3(4.0, 4.0, 5.0);
     
-    float nDotVP = max(0.0, dot(eyeNormal, normalize(lightPosition)));
+  float nDotVP = //max(0.0, dot(eyeNormal, normalize(lightPosition)));
+      abs(dot(eyeNormal, normalize(lightPosition)));
                  
-    colorVarying = color * nDotVP + ambientLight;
-    
-    gl_Position = modelViewProjectionMatrix * position;
+  colorVarying = color * nDotVP + ambientLight;
+  
+  gl_Position = modelViewProjectionMatrix * position;
 }

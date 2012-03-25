@@ -142,8 +142,20 @@ GLfloat color_pallet[] = {
   0.0, 0.0, 1.0,    // B
 };
 
+GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
+/*GLfloat color_pallet[] = {
+  0.8, 0.0, 0.0,    // R
+  1.0, 1.0, 1.0,    // W
+  .65, 0.3, 0.0, // O - ambient is specifically subtracted to help 
+                  // differentiate from yellow
+  1.0, 1.0, 0.0,    // Y
+  0.0, 0.37, 0.0,   // G
+  0.0, 0.0, 1.0,    // B
+};*/
 // Color elements per vertex per square per face per cube
 GLfloat colors[3 * 3 * 2 * 9 * 6];
+
+static const float kAnimationDuration = 0.5;
 
 // Attribute index.
 enum
@@ -161,7 +173,7 @@ GLKMatrix4 gPositionCubeMatrix = GLKMatrix4MakeTranslation(-1.5, -1.5, -1.5);
 GLKMatrix4 gShrinkCubeMatrix = GLKMatrix4MakeScale(0.66, 0.66, 0.66);
 GLKMatrix4 gNormalizeCubeMatrix =
     GLKMatrix4Multiply(gShrinkCubeMatrix, gPositionCubeMatrix);
-GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
+GLKVector3 gLightPosition = GLKVector3Make(4, 4, 5);
 
 @implementation CubeView
 
@@ -302,6 +314,8 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
   glUseProgram(self.program);
   glUniform3fv(
       [self uniformWithName:(GLchar*)"ambientLight"], 1, gAmbientLight.v);
+  //glUniform3fv(
+  //    [self uniformWithName:(GLchar*)"lightPosition"], 1, gLightPosition.v);
   glUseProgram(0);
 
   // Unset the active VAO so other code cannot mess this up
@@ -552,7 +566,7 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
     animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 0, 0, -1);
   }
   animation.affectedArea = cubelet;
-  animation.duration = 0.5;
+  animation.duration = kAnimationDuration;
   animation.doneCallback = 
     [NSInvocation invocationWithTarget:self
         selector:@selector(twistModel:direction:)
@@ -588,7 +602,7 @@ GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
       break;
   };
   animation.affectedArea = WHOLE_CUBE;
-  animation.duration = 0.5;
+  animation.duration = kAnimationDuration;
   animation.doneCallback = 
       [NSInvocation invocationWithTarget:self
                                 selector:@selector(rotateModel:)

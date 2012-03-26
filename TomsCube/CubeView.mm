@@ -9,6 +9,16 @@
 #import "CubeView.hh"
 #import "NSInvocation+Shorthand.h"
 
+static const float kAnimationDuration = 0.5;
+
+// TODO: Is the camera no longer here? This probably needs to be rethought
+// and refactored for proper object composition
+GLKMatrix4 gCameraMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
+GLKMatrix4 gPositionCubeMatrix = GLKMatrix4MakeTranslation(-1.5, -1.5, -1.5);
+GLKMatrix4 gShrinkCubeMatrix = GLKMatrix4MakeScale(0.66, 0.66, 0.66);
+GLKMatrix4 gNormalizeCubeMatrix =
+GLKMatrix4Multiply(gShrinkCubeMatrix, gPositionCubeMatrix);
+
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 #define FACING_CUBE_STICKER(minx, maxx, miny, maxy, z, normz) \
@@ -142,20 +152,8 @@ GLfloat color_pallet[] = {
   0.0, 0.0, 1.0,    // B
 };
 
-GLKVector3 gAmbientLight = GLKVector3Make(0.1, 0.1, 0.1);
-/*GLfloat color_pallet[] = {
-  0.8, 0.0, 0.0,    // R
-  1.0, 1.0, 1.0,    // W
-  .65, 0.3, 0.0, // O - ambient is specifically subtracted to help 
-                  // differentiate from yellow
-  1.0, 1.0, 0.0,    // Y
-  0.0, 0.37, 0.0,   // G
-  0.0, 0.0, 1.0,    // B
-};*/
 // Color elements per vertex per square per face per cube
 GLfloat colors[3 * 3 * 2 * 9 * 6];
-
-static const float kAnimationDuration = 0.5;
 
 // Attribute index.
 enum
@@ -165,15 +163,6 @@ enum
   ATTRIB_COLOR_INDEX,
   NUM_ATTRIBUTES
 };
-
-// TODO: Is the camera no longer here? This probably needs to be rethought
-// and refactored for proper object composition
-GLKMatrix4 gCameraMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
-GLKMatrix4 gPositionCubeMatrix = GLKMatrix4MakeTranslation(-1.5, -1.5, -1.5);
-GLKMatrix4 gShrinkCubeMatrix = GLKMatrix4MakeScale(0.66, 0.66, 0.66);
-GLKMatrix4 gNormalizeCubeMatrix =
-    GLKMatrix4Multiply(gShrinkCubeMatrix, gPositionCubeMatrix);
-GLKVector3 gLightPosition = GLKVector3Make(4, 4, 5);
 
 @implementation CubeView
 
@@ -311,13 +300,6 @@ GLKVector3 gLightPosition = GLKVector3Make(4, 4, 5);
   glVertexAttribPointer(GLKVertexAttribColor,
                         3, GL_FLOAT, GL_FALSE, 0, 0);
   
-  glUseProgram(self.program);
-  glUniform3fv(
-      [self uniformWithName:(GLchar*)"ambientLight"], 1, gAmbientLight.v);
-  //glUniform3fv(
-  //    [self uniformWithName:(GLchar*)"lightPosition"], 1, gLightPosition.v);
-  glUseProgram(0);
-
   // Unset the active VAO so other code cannot mess this up
   glBindVertexArrayOES(0);
   
@@ -348,16 +330,33 @@ GLKVector3 gLightPosition = GLKVector3Make(4, 4, 5);
   _isAnimating = [_animationQueue fastFoward:self.scene.timeSinceLastUpdate
                                  forSnapshot:&_animationSnapshot];
   if (_isAnimating) {
+#define OLD 0
+#if OLD
     GLKMatrix4 animationMatrix =
         GLKMatrix4MakeWithQuaternion(_animationSnapshot.state);
     animationMatrix = GLKMatrix4Multiply(animationMatrix, gNormalizeCubeMatrix);
     animationMatrix = GLKMatrix4Multiply(gCameraMatrix, animationMatrix);
+ 
     _animationNormalMatrix = GLKMatrix3InvertAndTranspose(
         GLKMatrix4GetMatrix3(animationMatrix),
         NULL);
     _animationModelViewProjectionMatrix = GLKMatrix4Multiply(
         self.scene.effect.transform.projectionMatrix,
         animationMatrix);
+#else
+    GLKMatrix4 animationMatrix = gNormalizeCubeMatrix;
+    animationMatrix = GLKMatrix4Multiply(
+        GLKMatrix4MakeWithQuaternion(_animationSnapshot.state),
+        animationMatrix);
+    animationMatrix = GLKMatrix4Multiply(gCameraMatrix, animationMatrix);
+    
+    _animationNormalMatrix = GLKMatrix3InvertAndTranspose(
+        GLKMatrix4GetMatrix3(self.scene.effect.transform.projectionMatrix),
+        NULL);
+    _animationModelViewProjectionMatrix = GLKMatrix4Multiply(
+       self.scene.effect.transform.projectionMatrix,
+       animationMatrix);
+#endif
   }
       
   // This must come after retrieving animation parameters, becuase the animation
@@ -554,16 +553,14 @@ GLKVector3 gLightPosition = GLKVector3Make(4, 4, 5);
 - (void)startTwist:(Cubelet)cubelet direction:(Twist)direction
 {
   Animation *animation = [Animation new];
-  float rad = M_PI_2 * (direction == NORMAL ? 1 : -1);
+  float rad = M_PI_2 * (direction == NORMAL ? -1 : 1);
+  animation.start = GLKQuaternionIdentity;
   if (cubelet >= UP && cubelet <= DOWN) {
-    animation.start = GLKQuaternionMakeWithAngleAndAxis(0, 0, 1, 0);
-    animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 0,- 1, 0);
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 0, 1, 0);
   } else if (cubelet >= LEFT && cubelet <= RIGHT) {
-    animation.start = GLKQuaternionMakeWithAngleAndAxis(0, -1, 0, 0);
-    animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 1, 0, 0);
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(-rad, 1, 0, 0);
   } else {
-    animation.start = GLKQuaternionMakeWithAngleAndAxis(0, 0, 0, 1);
-    animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 0, 0, -1);
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(rad, 0, 0, 1);
   }
   animation.affectedArea = cubelet;
   animation.duration = kAnimationDuration;

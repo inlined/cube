@@ -14,18 +14,19 @@ varying lowp vec3 colorVarying;
 
 uniform mat4 modelViewProjectionMatrix;
 uniform mat3 normalMatrix;
-uniform vec3 ambientLight;
-//uniform vec3 lightPosition;
 
 void main()
 {
   vec3 eyeNormal = normalize(normalMatrix * normal);
-  vec3 lightPosition = vec3(4.0, 4.0, 5.0);
-    
-  float nDotVP = //max(0.0, dot(eyeNormal, normalize(lightPosition)));
-      abs(dot(eyeNormal, normalize(lightPosition)));
-                 
-  colorVarying = color * nDotVP + ambientLight;
+  vec3 lightPosition = vec3(4.0, 4.0, 4.0);
   
+  // a subtractive fog?
+  vec3 fogColor = vec3(0.5, 0.5, 0.5);
+    
+  float nDotVP = abs(dot(eyeNormal, normalize(lightPosition)));
+
   gl_Position = modelViewProjectionMatrix * position;
+
+  colorVarying = color * nDotVP +
+     (5.0 - (gl_Position[2] + 1.0)) / 5.0 * fogColor;
 }

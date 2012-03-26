@@ -236,13 +236,59 @@ NSString* nameForFace(WhichFace face) {
 {
   up[6] = YELLOW;
   up[7] = ORANGE;
+  left[2] = RED;
+  left[5] = ORANGE;
+  right[0] = ORANGE;
+  right[3] = RED;
+  down[0] = RED;
+  down[1] = ORANGE;
   c->Twist(FRONT, NORMAL);
   CHECK_FACE(RIGHT_FACE, 0, YELLOW);
   CHECK_FACE(RIGHT_FACE, 3, ORANGE);
   CHECK_FACE(RIGHT_FACE, 6, GREEN);
+  
+  CHECK_FACE(TOP_FACE, 8, RED);
+  CHECK_FACE(TOP_FACE, 7, ORANGE);
+  CHECK_FACE(TOP_FACE, 6, YELLOW);
+  
+  CHECK_FACE(BOTTOM_FACE, 2, ORANGE);
+  CHECK_FACE(BOTTOM_FACE, 1, RED);
+  CHECK_FACE(BOTTOM_FACE, 0, WHITE);
+  
+  CHECK_FACE(LEFT_FACE, 2, BLUE);
+  CHECK_FACE(LEFT_FACE, 5, ORANGE);
+  CHECK_FACE(LEFT_FACE, 8, RED);
+  
+  // Squares which shouldn't be rotated aren't:
   CHECK_FACE(RIGHT_FACE, 2, WHITE);
   CHECK_FACE(RIGHT_FACE, 5, WHITE);
   CHECK_FACE(RIGHT_FACE, 8, WHITE);
+  
+  c->Reset();
+  up[6] = YELLOW;
+  up[7] = ORANGE;
+  left[2] = RED;
+  left[5] = ORANGE;
+  right[0] = ORANGE;
+  right[3] = RED;
+  down[0] = RED;
+  down[1] = ORANGE;
+  c->Twist(FRONT, PRIME);
+  CHECK_FACE(LEFT_FACE, 8, YELLOW);
+  CHECK_FACE(LEFT_FACE, 5, ORANGE);
+  CHECK_FACE(LEFT_FACE, 2, GREEN);
+  
+  CHECK_FACE(BOTTOM_FACE, 0, RED);
+  CHECK_FACE(BOTTOM_FACE, 1, ORANGE);
+  CHECK_FACE(BOTTOM_FACE, 2, YELLOW);
+  
+  CHECK_FACE(TOP_FACE, 6, ORANGE);
+  CHECK_FACE(TOP_FACE, 7, RED);
+  CHECK_FACE(TOP_FACE, 8, WHITE);
+  
+  CHECK_FACE(RIGHT_FACE, 6, BLUE);
+  CHECK_FACE(RIGHT_FACE, 3, ORANGE);
+  CHECK_FACE(RIGHT_FACE, 0, RED);
 }
 
 - (void)testFaceRotationsAreCorrectForTwists
@@ -270,15 +316,15 @@ NSString* nameForFace(WhichFace face) {
   
   
   c->Reset();
-  front[1] = WHITE;
+  front[0] = WHITE;
   c->Twist(FRONT, NORMAL);
   CHECK_FACE(TOP_FACE, 7, YELLOW);
-  CHECK_FACE(FRONT_FACE, 5, WHITE);
+  CHECK_FACE(FRONT_FACE, 2, WHITE);
   
-  back[1] = WHITE;
+  back[0] = WHITE;
   c->Twist(BACK, NORMAL);
   CHECK_FACE(TOP_FACE, 2, YELLOW);
-  CHECK_FACE(BACK_FACE, 3, WHITE);
+  CHECK_FACE(BACK_FACE, 6, WHITE);
 }
 
 - (void)testTwistUp

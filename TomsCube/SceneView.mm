@@ -89,15 +89,7 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{return interfaceOrientation == UIInterfaceOrientationLandscapeLeft;
-  /*
-  BOOL will_turn;
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-    will_turn = (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-  } else {
-    will_turn = YES;
-  }
-  return _aspectRatioDirty = will_turn;*/
+{
   return NO;
 }
 

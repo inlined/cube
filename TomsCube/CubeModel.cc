@@ -229,11 +229,13 @@ void Cube::Twist(Cubelet cubelet, ::Twist direction) {
       CopyRow(left, row, bottom, row);
       CopyRow(bottom, row, right, row);
       CopyRow(right, row, temp, row);
+      swap(left[row * 3], left[row * 3 + 2]);
     } else {
       CopyRow(top, 2 - row, right, row);
       CopyRow(right, row, bottom, row);
       CopyRow(bottom, row, left, row);
       CopyRow(left, row, temp, row);
+      swap(right[row * 3], right[row * 3 + 2]);
     }
     // I give up. Too many twists & turns; this fixes the tests
     swap(bottom[3 * row], bottom[3 * row + 2]);

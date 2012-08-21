@@ -59,7 +59,7 @@
  * simple example, though, so that is left as an Exercise for the
  * Programmer.
  */
-#define TRACKBALLSIZE  (0.8)
+#define TRACKBALLSIZE  (0.125)
 
 /*
  * Local function prototypes (not defined in trackball.h)
@@ -193,7 +193,7 @@ trackball(float q[4], float p1x, float p1y, float p2x, float p2y)
      */
     if (t > 1.0) t = 1.0;
     if (t < -1.0) t = -1.0;
-    phi = 2.0 * asin(t);
+    phi = 20.0 * asin(t);
 
     axis_to_quat(a,phi,q);
 }

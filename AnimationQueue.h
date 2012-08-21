@@ -10,6 +10,9 @@
 #import <GLKit/GLKit.h>
 
 #import "CubeEnums.h"
+#import "TrackballGestureRecognizer.h"
+
+@class CubeView;
 
 @interface Animation : NSObject
 @property (assign, nonatomic) GLKQuaternion start;
@@ -25,11 +28,18 @@ typedef struct AnimationSnapshot {
 } AnimationSnapshot;
 
 //TODO use a wrapper object for synchronization
-@interface AnimationQueue : NSObject {
+@interface AnimationQueue : NSObject <UIGestureRecognizerDelegate> {
   NSMutableArray* queue;
   NSTimeInterval timeIntoAnimation;
   dispatch_queue_t mutex;
+  
+  bool _isDragging;
+  AnimationSnapshot _dragState;
+  CubeView* view;
 }
+
+- (void)SetUpTrackballTrackingWithView:(CubeView*)target;
+- (void)handleDrag:(TrackballGestureRecognizer*)recognizer;
 - (void)enqueueAnimation:(Animation*)animation;
 - (bool)fastFoward:(NSTimeInterval)duration
        forSnapshot:(AnimationSnapshot*)snapshot;

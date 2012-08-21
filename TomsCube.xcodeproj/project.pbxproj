@@ -20,6 +20,7 @@
 		E981B2B41512C50600176A1B /* NSInvocation+Shorthand.m in Sources */ = {isa = PBXBuildFile; fileRef = E981B2B31512C50600176A1B /* NSInvocation+Shorthand.m */; };
 		E9871708150FE6CE0096089A /* CubeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9871707150FE6CE0096089A /* CubeView.mm */; };
 		E987170C151003010096089A /* ModelView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E987170B151003010096089A /* ModelView.mm */; };
+		E99EB6291527B8AF00A1FB12 /* TrackballGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E99EB6281527B8AF00A1FB12 /* TrackballGestureRecognizer.m */; };
 		E9AE473C150DDB0600146D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473B150DDB0600146D3D /* UIKit.framework */; };
 		E9AE473E150DDB0600146D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473D150DDB0600146D3D /* Foundation.framework */; };
 		E9AE4740150DDB0600146D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE473F150DDB0600146D3D /* CoreGraphics.framework */; };
@@ -76,6 +77,8 @@
 		E9871707150FE6CE0096089A /* CubeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CubeView.mm; path = TomsCube/CubeView.mm; sourceTree = "<group>"; };
 		E987170A151003010096089A /* ModelView.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelView.hh; path = TomsCube/ModelView.hh; sourceTree = "<group>"; };
 		E987170B151003010096089A /* ModelView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ModelView.mm; path = TomsCube/ModelView.mm; sourceTree = "<group>"; };
+		E99EB6271527B8AF00A1FB12 /* TrackballGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackballGestureRecognizer.h; sourceTree = "<group>"; };
+		E99EB6281527B8AF00A1FB12 /* TrackballGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackballGestureRecognizer.m; sourceTree = "<group>"; };
 		E9AE4737150DDB0600146D3D /* TomsCube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomsCube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AE473B150DDB0600146D3D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E9AE473D150DDB0600146D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -270,6 +273,8 @@
 				E9FAA4C215128D59004BD962 /* AnimationQueue.h */,
 				E9FAA4C315128D59004BD962 /* AnimationQueue.m */,
 				E981B2B51512C54A00176A1B /* CubeEnums.h */,
+				E99EB6271527B8AF00A1FB12 /* TrackballGestureRecognizer.h */,
+				E99EB6281527B8AF00A1FB12 /* TrackballGestureRecognizer.m */,
 			);
 			name = Cube;
 			sourceTree = "<group>";
@@ -405,6 +410,7 @@
 				E94D35CD1511331400F52664 /* SpinningBoxView.m in Sources */,
 				E9FAA4C415128D59004BD962 /* AnimationQueue.m in Sources */,
 				E981B2B41512C50600176A1B /* NSInvocation+Shorthand.m in Sources */,
+				E99EB6291527B8AF00A1FB12 /* TrackballGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

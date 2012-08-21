@@ -7,6 +7,9 @@
 //
 
 #import "AnimationQueue.h"
+#import "TrackballGestureRecognizer.h"
+#import "CubeView.hh"
+#import "NSInvocation+Shorthand.h"
 
 @implementation Animation
 @synthesize start;
@@ -54,6 +57,87 @@ float smooth(float t) {
   dispatch_release(mutex);
 }
 
+- (void)SetUpTrackballTrackingWithView:(CubeView*) aView
+{
+  self->view = aView;
+  TrackballGestureRecognizer *recognizer = 
+  [[TrackballGestureRecognizer alloc]
+   initWithTarget:self
+   action:@selector(handleDrag:)];
+  [recognizer setDelegate:self];
+  recognizer.minimumNumberOfTouches = 2;
+  recognizer.maximumNumberOfTouches = 2;
+  [aView.scene.view addGestureRecognizer:recognizer];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+       shouldReceiveTouch:(UITouch *)touch 
+{
+  // TODO: Filter out black touches
+  return YES;
+}
+
+- (Animation *) finalizeDragAnimation:(TrackballGestureRecognizer *) recognizer
+{
+  Animation *animation =[Animation new];
+  animation.affectedArea = WHOLE_CUBE;
+  animation.start = recognizer.currentRotation;
+  animation.duration = 0.2;
+  
+  CGPoint velocity = recognizer.currentVelocity;
+  if (velocity.x < -4) {
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(M_PI_2, 0, -1, 0);
+    animation.doneCallback = 
+    [NSInvocation invocationWithTarget:view
+                              selector:@selector(rotateModel:)
+                       retainArguments:NO, ROT_LEFT];
+  } else if (velocity.x > 4) {
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(M_PI_2, 0, 1, 0);
+    animation.doneCallback = 
+    [NSInvocation invocationWithTarget:view
+                              selector:@selector(rotateModel:)
+                       retainArguments:NO, ROT_RIGHT];
+  } else if (velocity.y < -4) {
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(M_PI_2, 1, 0, 0);
+    animation.doneCallback = 
+    [NSInvocation invocationWithTarget:view
+                              selector:@selector(rotateModel:)
+                       retainArguments:NO, ROT_DOWN];
+  } else if (velocity.y > 4) {
+    animation.stop = GLKQuaternionMakeWithAngleAndAxis(M_PI_2, -1, 0, 0);
+    animation.doneCallback = 
+    [NSInvocation invocationWithTarget:view
+                              selector:@selector(rotateModel:)
+                       retainArguments:NO, ROT_UP];
+  } else {
+    animation.stop = GLKQuaternionIdentity;
+  }
+  return animation;
+}
+
+- (void)handleDrag:(TrackballGestureRecognizer *)gestureRecognizer
+{
+  if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    Animation *animation = [self finalizeDragAnimation:gestureRecognizer];
+
+    NSLog(@"Quat correct %@ -> %@",
+          NSStringFromGLKQuaternion(animation.start),
+          NSStringFromGLKQuaternion(animation.stop));
+    
+    dispatch_sync(mutex, ^{
+      self->_isDragging = NO;
+      [queue insertObject:animation atIndex:0];
+    });
+  } else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+    NSLog(@"Gesture quat: %@", NSStringFromGLKQuaternion(gestureRecognizer.currentRotation));
+    dispatch_sync(mutex, ^{
+      _isDragging = YES;
+      _dragState.affectedArea = WHOLE_CUBE;
+      _dragState.state = [gestureRecognizer currentRotation];
+    });
+  }
+}
+
 - (void)enqueueAnimation:(Animation*)animation
 {
   dispatch_sync(mutex, ^{
@@ -64,11 +148,16 @@ float smooth(float t) {
 - (bool)fastFoward:(NSTimeInterval)duration
        forSnapshot:(AnimationSnapshot*)snapshot
 {
-  __block bool queueEmpty;
-  __block Animation* front;
+  __block bool queueEmpty = NO;
+  __block Animation* front = nil;
+  __block bool isDragging = NO;
   
   // Try peek
   dispatch_sync(mutex, ^{
+    if (_isDragging) {
+      *snapshot = _dragState;
+      isDragging = YES;
+    }
     if ([queue count]) {
       queueEmpty = NO;
       front = [queue objectAtIndex:0];
@@ -77,6 +166,7 @@ float smooth(float t) {
     }
   });
   
+  if (isDragging) { return YES; }
   if (queueEmpty) {
     return NO;
   }

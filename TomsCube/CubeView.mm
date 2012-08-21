@@ -7,7 +7,9 @@
 //
 
 #import "CubeView.hh"
+#import "CubeModel.h"
 #import "NSInvocation+Shorthand.h"
+#import "TrackballGestureRecognizer.h"
 
 static const float kAnimationDuration = 0.5;
 
@@ -18,6 +20,8 @@ GLKMatrix4 gPositionCubeMatrix = GLKMatrix4MakeTranslation(-1.5, -1.5, -1.5);
 GLKMatrix4 gShrinkCubeMatrix = GLKMatrix4MakeScale(0.66, 0.66, 0.66);
 GLKMatrix4 gNormalizeCubeMatrix =
 GLKMatrix4Multiply(gShrinkCubeMatrix, gPositionCubeMatrix);
+
+#pragma mark Cube Vertices
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -142,6 +146,8 @@ GLfloat gCubeVertices[] = {
   VERTICAL_CUBE_STICKER(2.05, 2.95, 0, 0.05, 0.95, -1),
 };
 
+#pragma mark -
+
 GLfloat color_pallet[] = {
   0.8, 0.0, 0.0,    // R
   1.0, 1.0, 1.0,    // W
@@ -163,6 +169,12 @@ enum
   ATTRIB_COLOR_INDEX,
   NUM_ATTRIBUTES
 };
+
+@interface CubeView () {
+  // Model
+  Cube* _cube;
+}
+@end
 
 @implementation CubeView
 
@@ -204,12 +216,7 @@ enum
   }
 }
 
-- (void)handleTap:(UIGestureRecognizer*)gestureRecognizer
-{
-  NSLog(@"Did tap");
-}
-
-- (void)handleSwipe:(UIGestureRecognizer *)gestureRecognizer;
+- (void)handleSwipe:(UIGestureRecognizer *)gestureRecognizer
 {
   UISwipeGestureRecognizer* swipe =
       (UISwipeGestureRecognizer*)gestureRecognizer;
@@ -221,11 +228,7 @@ enum
   int clipY = frame.size.height / 4;
   CGRect clipped = CGRectInset(frame, clipX, clipY);
 
-  NSLog(@"Point:%@ Frame:%@", 
-        NSStringFromCGPoint(centroid),
-        NSStringFromCGRect(clipped));
   if (CGRectContainsPoint(clipped, centroid)) {
-    NSLog(@"In square");
     float col_ratio = (centroid.x - frame.origin.x) / frame.size.width * 3.0;
     float row_ratio = (centroid.y - frame.origin.y) / frame.size.height * 3.0;
     Cubelet col = MIDDLE;
@@ -267,6 +270,7 @@ enum
 - (void)setupGL
 {
   [super setupGL];
+  [_animationQueue SetUpTrackballTrackingWithView:self];
   
   bool did_load = [self
       loadShaders:[NSArray arrayWithObjects:@"Phong.vsh", @"Phong.fsh", nil]
@@ -329,21 +333,8 @@ enum
   
   _isAnimating = [_animationQueue fastFoward:self.scene.timeSinceLastUpdate
                                  forSnapshot:&_animationSnapshot];
+  
   if (_isAnimating) {
-#define OLD 0
-#if OLD
-    GLKMatrix4 animationMatrix =
-        GLKMatrix4MakeWithQuaternion(_animationSnapshot.state);
-    animationMatrix = GLKMatrix4Multiply(animationMatrix, gNormalizeCubeMatrix);
-    animationMatrix = GLKMatrix4Multiply(gCameraMatrix, animationMatrix);
- 
-    _animationNormalMatrix = GLKMatrix3InvertAndTranspose(
-        GLKMatrix4GetMatrix3(animationMatrix),
-        NULL);
-    _animationModelViewProjectionMatrix = GLKMatrix4Multiply(
-        self.scene.effect.transform.projectionMatrix,
-        animationMatrix);
-#else
     GLKMatrix4 animationMatrix = gNormalizeCubeMatrix;
     animationMatrix = GLKMatrix4Multiply(
         GLKMatrix4MakeWithQuaternion(_animationSnapshot.state),
@@ -356,7 +347,6 @@ enum
     _animationModelViewProjectionMatrix = GLKMatrix4Multiply(
        self.scene.effect.transform.projectionMatrix,
        animationMatrix);
-#endif
   }
       
   // This must come after retrieving animation parameters, becuase the animation

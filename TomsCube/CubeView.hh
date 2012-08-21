@@ -9,14 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-#import "CubeModel.h"
 #import "ModelView.hh"
 #import "AnimationQueue.h"
 
-@interface CubeView : ModelView {
-  // Model
-  Cube* _cube;
-  
+@interface CubeView : ModelView {  
   // Shader attribs
   GLuint _vertexArray;
   GLuint _vertexBuffers[2];
@@ -41,7 +37,6 @@
 - (void)viewDidUnload;
 - (void)handleRotation:(UIGestureRecognizer*)gestureRecognizer;
 - (void)handleSwipe:(UIGestureRecognizer *)gestureRecognizer;
-- (void)handleTap:(UIGestureRecognizer*)recognizer;
 
 -(void) updateColorBuffer;
 -(void) twistModel:(Cubelet)cubelet direction:(Twist)direction;

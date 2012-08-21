@@ -10,6 +10,7 @@
 #import "ModelView.hh"
 #import "SpinningBoxView.h"
 #import "CubeView.hh"
+#import "TrackballGestureRecognizer.h"
 
 @interface SceneView () {
   ModelView* _model_view;
@@ -50,23 +51,21 @@
                 initWithTarget:_model_view action:@selector(handleRotation:)];
   [recognizer setDelegate:self];
   [view addGestureRecognizer:recognizer];
+  
   [self addSwipeRecognizer:UISwipeGestureRecognizerDirectionLeft];
   [self addSwipeRecognizer:UISwipeGestureRecognizerDirectionRight];
   [self addSwipeRecognizer:UISwipeGestureRecognizerDirectionUp];
   [self addSwipeRecognizer:UISwipeGestureRecognizerDirectionDown];
-  recognizer = [[UITapGestureRecognizer alloc]
-                initWithTarget:_model_view action:@selector(handleTap:)];
-  [recognizer setDelegate:self];
-  [view addGestureRecognizer:recognizer];
 }
 
-- (void)addSwipeRecognizer:(UISwipeGestureRecognizerDirection)direction
+- (UISwipeGestureRecognizer *)addSwipeRecognizer:(UISwipeGestureRecognizerDirection)direction
 {
   UISwipeGestureRecognizer* recognizer = [UISwipeGestureRecognizer new];
   [recognizer addTarget:_model_view action:@selector(handleSwipe:)];
   [recognizer setDelegate:self];
   recognizer.direction = direction;
   [self.view addGestureRecognizer:recognizer];
+  return recognizer;
 }
 
 - (void)viewDidUnload
